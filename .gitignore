@@ -1,0 +1,9 @@
+# Ignore temporary and state-tracking files
+eshell/*
+projectile-bookmarks.eld
+recentf
+transient/*
+var/*
+
+# Ignore backup files
+*~
