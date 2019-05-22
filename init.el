@@ -117,8 +117,8 @@
 
 (load "appearance")
 (load "projects")
-(load "git")
 (load "selection")
+(load "git")
 
 (use-package comment-dwim-2
   :ensure t
