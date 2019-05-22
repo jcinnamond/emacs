@@ -4,6 +4,7 @@ projectile-bookmarks.eld
 recentf
 transient/*
 var/*
+elpa/archives/*
 
 # Ignore backup files
 *~
