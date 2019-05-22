@@ -9,7 +9,7 @@
  '(global-evil-surround-mode t)
  '(package-selected-packages
    (quote
-    (flycheck colors rainbow-mode evil-surround auto-compile yaml-mode seeing-is-believing yasnippets-snippets yasnippet-snippets yasnippet comment-dwim-2 ag evil-mc evil-iedit-state iedit expand-region github-browse-file evil-magit which-key use-package ivy-rich ivy-prescient evil counsel-projectile company-prescient)))
+    (markdown-mode markdown flycheck colors rainbow-mode evil-surround auto-compile yaml-mode seeing-is-believing yasnippets-snippets yasnippet-snippets yasnippet comment-dwim-2 ag evil-mc evil-iedit-state iedit expand-region github-browse-file evil-magit which-key use-package ivy-rich ivy-prescient evil counsel-projectile company-prescient)))
  '(safe-local-variable-values (quote ((dockspec-container-name . "iand_test_1")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

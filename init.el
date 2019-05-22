@@ -162,6 +162,7 @@
 (load "ruby")
 (load "javascript")
 (load "css")
+(load "markdown")
 
 ;; TODO: go
 ;; TODO: elixir
