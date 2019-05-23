@@ -92,7 +92,7 @@
 
    ;; > Mode line
    `(mode-line ((t (:foreground ,fg-color :background ,added-color))))
-   `(mode-line-inactive ((t (:foreground ,fg-color :background ,bg-color))))
+   `(mode-line-inactive ((t (:foreground ,fg-color :background ,menu-bg-color))))
 
    ;; > Ivy
    `(ivy-current-match ((t (:background ,menu-selection-bg-color :foreground ,fg-color))))
