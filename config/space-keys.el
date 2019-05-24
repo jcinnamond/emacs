@@ -5,6 +5,7 @@
 
 ;; Emacs
 (define-key space-map (kbd "SPC") 'counsel-M-x)
+(define-key space-map (kbd ":") 'eval-expression)
 
 ;; Buffers
 (define-key space-map (kbd "TAB") (lambda () (interactive) (switch-to-buffer (other-buffer))))
