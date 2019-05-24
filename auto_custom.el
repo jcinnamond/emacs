@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("db1d67b1086c312f4984cc5041a1371376d88a3af3c75cab371685551ea826ca" "8bbb2afadbe378ec045465a0faafb3fe8fd169b79006f64ef4e080d34b73826b" "1b58ff1883f72ffa6a9eec221ad62190b4a3e7078e974cdd0bb2084c165c3c99" "44aa9c051694cacbcfc473aaa7a39d5e28e69879a0fd8e0102229448ca296cc1" default)))
+    ("dd007b9a7234b373b98f06e22d6d69418a38c2c249a057c867c68b13c7c7f02e" "db1d67b1086c312f4984cc5041a1371376d88a3af3c75cab371685551ea826ca" "8bbb2afadbe378ec045465a0faafb3fe8fd169b79006f64ef4e080d34b73826b" "1b58ff1883f72ffa6a9eec221ad62190b4a3e7078e974cdd0bb2084c165c3c99" "44aa9c051694cacbcfc473aaa7a39d5e28e69879a0fd8e0102229448ca296cc1" default)))
  '(global-evil-surround-mode t)
  '(package-selected-packages
    (quote
