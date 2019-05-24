@@ -10,7 +10,8 @@
     (define-prefix-command 'git-commit-comma-map)
     (evil-define-key '(normal visual motion emacs) git-commit-mode-map (kbd ",") 'git-commit-comma-map)
     (define-key 'git-commit-comma-map (kbd "c") 'with-editor-finish)
-    (define-key 'git-commit-comma-map (kbd "k") 'with-editor-cancel)))
+    (define-key 'git-commit-comma-map (kbd "k") 'with-editor-cancel)
+    (add-hook 'git-commit-mode-hook 'flyspell-mode)))
 
 (use-package github-browse-file
   :ensure t)
