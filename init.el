@@ -1,6 +1,10 @@
 (let ((default-directory  "~/.emacs.d/my-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; Start a server unless one is already running
+(require 'server)
+(unless (server-running-p) (server-start))
+
 ;; Appearance
 ;;
 ;; Strip back the emacs UI, set up the default font, and load the theme
