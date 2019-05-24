@@ -142,6 +142,7 @@
   :ensure t
   :defines yas-maybe-expand
   :init
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (yas-global-mode 1)
   :config
   (evil-define-key 'insert 'yas-minor-mode-map (kbd "TAB") yas-maybe-expand)

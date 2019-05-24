@@ -12,7 +12,11 @@
   (setq-default ruby-align-chained-calls t)
   (add-hook 'ruby-mode-hook 'flyspell-prog-mode)
   (add-hook 'ruby-mode-hook 'flycheck-mode)
-  (add-hook 'ruby-mode-hook 'seeing-is-believing))
+  (add-hook 'ruby-mode-hook 'seeing-is-believing)
+  (add-hook 'ruby-mode-hook (lambda ()
+			      (if (buffer-file-name)
+				  (if (string-match "_spec\\.rb\\'" buffer-file-name)
+				      (yas-activate-extra-mode 'ruby-testing))))))
 
 (use-package ruby-end
   :ensure t)
