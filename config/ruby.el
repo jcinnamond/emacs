@@ -3,6 +3,8 @@
   :config
   (define-prefix-command 'ruby-comma-map)
   (evil-define-key '(normal visual motion emacs) ruby-mode-map (kbd ",") 'ruby-comma-map)
+  (define-key 'ruby-comma-map (kbd "{") 'ruby-toggle-block)
+  (define-key 'ruby-comma-map (kbd "'") 'ruby-toggle-string-quotes)
   (define-key 'ruby-comma-map (kbd "t t") 'dockspec-run-current-file)
   (define-key 'ruby-comma-map (kbd "t s") 'dockspec-run-current-line)
   (define-key 'ruby-comma-map (kbd "t a") 'dockspec-run-all)
@@ -11,6 +13,9 @@
   (add-hook 'ruby-mode-hook 'flyspell-prog-mode)
   (add-hook 'ruby-mode-hook 'flycheck-mode)
   (add-hook 'ruby-mode-hook 'seeing-is-believing))
+
+(use-package ruby-end
+  :ensure t)
 
 (use-package seeing-is-believing
   :ensure t
