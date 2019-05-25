@@ -106,6 +106,7 @@
    `(org-block-background ((t (:foreground ,fg-color :background ,highlight-bg-color))))
 
    ;; > Magit
+   `(magit-hash ((t (:foreground ,contrast-2-color))))
    `(magit-section-heading ((t (:foreground ,fg-color :weight normal))))
    `(magit-filename ((t (:foreground ,fg-color :weight normal))))
    `(magit-section-highlight ((t (:background ,menu-bg-color))))
