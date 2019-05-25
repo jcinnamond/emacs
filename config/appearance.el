@@ -3,7 +3,7 @@
 		    :weight 'normal
 		    :width 'normal)
 
-(if (eq (system-name) "windy")
+(if (string= (system-name) "windy")
     (set-face-attribute 'default nil :height 210))
 
 (load-theme 'jc-dark)
