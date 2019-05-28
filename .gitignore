@@ -5,6 +5,7 @@ recentf
 transient/*
 var/*
 elpa/archives/*
+auto-save/*
 
 # Ignore backup files
 *~
