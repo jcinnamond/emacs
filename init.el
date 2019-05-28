@@ -123,37 +123,12 @@
 (load "projects")
 (load "selection")
 (load "git")
+(load "autocompletion")
 
 (use-package comment-dwim-2
   :ensure t
   :bind (:map space-map
               ("c l" . 'comment-dwim-2)))
-
-;; Autocompletion
-
-(use-package company
-  :ensure t
-  :defer t
-  :after yasnippet
-  :init
-  (use-package company-prescient :ensure t :init (company-prescient-mode 1))
-  :config
-  (define-key company-active-map [tab] yas-maybe-expand))
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-(use-package yasnippet
-  :ensure t
-  :defines yas-maybe-expand
-  :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  (yas-global-mode 1)
-  :config
-  (evil-define-key 'insert 'yas-minor-mode-map (kbd "TAB") yas-maybe-expand)
-  (evil-define-key '(normal visual motion emacs) 'global (kbd "TAB") yas-maybe-expand))
-
-(use-package yasnippet-snippets
-  :ensure t)
 
 (use-package dockspec)
 
