@@ -143,6 +143,7 @@
 (load "javascript")
 (load "css")
 (load "markdown")
+(load "elixir")
 
 ;; TODO: go
 ;; TODO: elixir

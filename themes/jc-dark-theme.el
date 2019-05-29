@@ -7,6 +7,7 @@
 (let* ((bg-color "#090909")
        (fg-color "#D6D6D6")
        (contrast-1-color "#acbe9a")
+       (low-contrast-color (color-desaturate-name contrast-1-color 10))
        (contrast-2-color "#9aacbe")
        (highlight-bg-color "#4d565f")
        (menu-bg-color (color-lighten-name bg-color 10))
@@ -38,7 +39,7 @@
 
    `(font-lock-builtin-face ((t (:foreground ,fg-color))))
    `(font-lock-constant-face ((t (:foreground ,fg-color))))
-   `(font-lock-doc-face ((t (:foreground ,contrast-2-color))))
+   `(font-lock-doc-face ((t (:foreground ,low-contrast-color))))
    `(font-lock-function-name-face ((t (:foreground ,fg-color weight: normal))))
    `(font-lock-keyword-face ((t (:foreground ,contrast-2-color))))
    `(font-lock-negation-char-face ((t (:foreground ,fg-color))))
