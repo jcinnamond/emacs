@@ -141,10 +141,10 @@
 (load "lisp-configuration")
 (load "ruby")
 (load "javascript")
+(load "elm")
 (load "css")
 (load "markdown")
 (load "elixir")
 
-;; TODO: go
 ;; TODO: elixir
 ;; TODO: haskell
