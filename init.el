@@ -145,6 +145,7 @@
 (load "css")
 (load "markdown")
 (load "elixir")
+(load "go")
 
 ;; TODO: elixir
 ;; TODO: haskell
