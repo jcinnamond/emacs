@@ -6,6 +6,8 @@ transient/*
 var/*
 elpa/archives/*
 auto-save/*
+auto_custom.el
+tramp
 
 # Ignore backup files
 *~
