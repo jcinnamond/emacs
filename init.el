@@ -21,6 +21,9 @@
 
 (show-paren-mode 1)
 
+(global-auto-revert-mode t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;;; MISC
 (put 'narrow-to-region 'disabled nil)
 
