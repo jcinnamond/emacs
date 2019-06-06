@@ -10,6 +10,7 @@
   (define-key 'ruby-comma-map (kbd "t a") 'dockspec-run-all)
   (define-key 'ruby-comma-map (kbd "t r") 'dockspec-rerun)
   (setq-default ruby-align-chained-calls t)
+  (setq-default flycheck-ruby-rubocop-executable "~/bin/rubocop")
   (add-hook 'ruby-mode-hook 'flyspell-prog-mode)
   (add-hook 'ruby-mode-hook 'flycheck-mode)
   (add-hook 'ruby-mode-hook 'seeing-is-believing)

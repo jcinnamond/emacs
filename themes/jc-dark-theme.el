@@ -78,7 +78,7 @@
    ;; > Flycheck & Flyspell
    `(flycheck-error ((t (:underline (:style wave :color ,error) :foreground ,error))))
    `(flycheck-warning ((t (:underline (:style wave :color ,warning) :foreground ,warning))))
-   `(flycheck-info ((t (:underline (:style wave :color ,error)))))
+   `(flycheck-info ((t (:background ,warning, :foreground ,fg-color))))
    `(flycheck-fringe-error ((t (:foreground ,error))))
    `(flycheck-fringe-info ((t (:foreground ,error))))
    `(flycheck-fringe-warning ((t (:foreground ,warning))))
