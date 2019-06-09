@@ -59,6 +59,7 @@
 (define-key space-map (kbd "w k") 'evil-window-up)
 (define-key space-map (kbd "w l") 'evil-window-right)
 (define-key space-map (kbd "w d") 'delete-window)
+(define-key space-map (kbd "w D") 'delete-frame)
 (define-key space-map (kbd "w m") 'delete-other-windows)
 (define-key space-map (kbd "w /") 'split-window-right)
 (define-key space-map (kbd "w _") 'split-window-below)
