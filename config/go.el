@@ -4,6 +4,8 @@
   (setq exec-path (append exec-path '("~/go/bin")))
   (define-prefix-command 'go-comma-map)
   (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
+  (define-key 'go-comma-map (kbd "d") 'godoc-at-point)
+  (define-key 'go-comma-map (kbd "D") 'godoc)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
 			    (setq indent-tabs-mode 1)
