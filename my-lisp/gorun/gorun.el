@@ -1,4 +1,4 @@
-;;; godock.el --- run commands on docker
+;;; gorun.el --- run commands on docker
 
 ;; Copyright 2019 John Cinnamond
 
@@ -31,83 +31,87 @@
 
 ;;; Code:
 
-(defgroup godock nil
+(defgroup gorun nil
   "Library for running a command in a docker container."
   :group 'languages)
 
-(defcustom godock-docker-command "docker exec -i"
+(defcustom gorun-docker-command "docker exec -i"
   "The command to run other commands in a docker container."
   :type 'string
-  :group 'godock)
+  :group 'gorun)
 
-(defcustom godock-container-name ""
+(defcustom gorun-container-name ""
   "The docker container to use."
   :type 'string
   :safe t
-  :group 'godock)
+  :group 'gorun)
 
-(defcustom godock-project-root nil
+(defcustom gorun-project-root nil
   "Base directory for the project. This is normally calculated but can be overridden by setting this explicitly."
   :type 'string
   :safe t
-  :group 'godock)
+  :group 'gorun)
 
-(defvar godock--last-command nil)
+(defvar gorun--last-command nil)
 
-(defun godock--project-root ()
-  (if (bound-and-true-p godock-project-root)
-      godock-project-root
-    (godock--find-project-root)))
+(defun gorun--project-root ()
+  (if (bound-and-true-p gorun-project-root)
+      gorun-project-root
+    (gorun--find-project-root)))
 
-(defun godock--filesystem-root-p (directory)
+(defun gorun--filesystem-root-p (directory)
   (string-equal directory (file-name-directory (directory-file-name directory))))
 
-(defun godock--find-project-root (&optional directory)
+(defun gorun--find-project-root (&optional directory)
   "Finds the root directory of the project by walking the directory tree until it finds a file that looks like it belongs in the directory root."
   (let ((directory (file-name-as-directory (or directory default-directory))))
-    (cond ((godock--filesystem-root-p directory)
+    (cond ((gorun--filesystem-root-p directory)
      (error "Could not determine the project root."))
     ((file-exists-p (expand-file-name ".git" directory)) directory)
     ((file-exists-p (expand-file-name "go.mod" directory)) directory)
     ((file-exists-p (expand-file-name "Makefile" directory)) directory)
-    (t (godock--find-project-root (file-name-directory (directory-file-name directory)))))))
+    (t (gorun--find-project-root (file-name-directory (directory-file-name directory)))))))
 
-(defun godock--file-path ()
-  (file-relative-name buffer-file-name (godock--project-root)))
+(defun gorun--file-path ()
+  (file-relative-name buffer-file-name (gorun--project-root)))
 
-(defun godock--run (command)
-  (let ((full-command (godock--build-command command)))
-    (godock--run-command full-command)
-    (setq godock--last-command full-command)))
+(defun gorun--run (command)
+  (let ((full-command (gorun--build-command command)))
+    (gorun--run-command full-command)
+    (setq gorun--last-command full-command)))
 
-(defun godock--run-command (command)
-  (let ((default-directory (godock--project-root)))
+(defun gorun--run-command (command)
+  (let ((default-directory (gorun--project-root)))
     (compile command)))
 
-(defun godock--build-command (command)
-  (if (string= "" godock-container-name)
-      (error "Set godock-container-name before trying to run a command")
+(defun gorun--build-command (command)
+  (if (string= "" gorun-container-name)
+      command
     (format "%s %s %s"
-      godock-docker-command
-      godock-container-name
+      gorun-docker-command
+      gorun-container-name
       command)))
 
-(defun godock-build ()
+(defun gorun-build ()
   (interactive)
-  (godock--run "go build"))
+  (gorun--run "go build"))
 
-(defun godock-test-file ()
+(defun gorun-test-file ()
   (interactive)
-  (godock--run (format "go test %s" (godock--file-path))))
+  (gorun--run (format "go test %s" (gorun--file-path))))
 
-(defun godock-rerun ()
+(defun gorun-test-all ()
   (interactive)
-  (if (bound-and-true-p godock--last-command)
-      (godock--run-command godock--last-command)
+  (gorun--run (format "go test")))
+
+(defun gorun-rerun ()
+  (interactive)
+  (if (bound-and-true-p gorun--last-command)
+      (gorun--run-command gorun--last-command)
     (error "Godock has not been run yet")))
 
-(define-minor-mode godock
+(define-minor-mode gorun
   "Run a command in a docker container")
 
-(provide 'godock)
-;;; godock.el ends here
+(provide 'gorun)
+;;; gorun.el ends here
