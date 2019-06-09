@@ -100,6 +100,10 @@
   (interactive)
   (gorun--run (format "go test %s" (gorun--file-path))))
 
+(defun gorun-test-single ()
+  (interactive)
+  (gorun--run (format "go test -run %s" (go--function-name))))
+
 (defun gorun-test-all ()
   (interactive)
   (gorun--run (format "go test")))

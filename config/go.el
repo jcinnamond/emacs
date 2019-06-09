@@ -17,4 +17,5 @@
   :hook go-mode
   :bind (:map go-comma-map
 	      ("c" . gorun-build)
+	      ("t s" . gorun-test-single)
 	      ("t t" . gorun-test-all)))
