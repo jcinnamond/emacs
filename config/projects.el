@@ -1,6 +1,7 @@
 (use-package projectile
   :ensure t
   :init
+  (projectile-global-mode 1)
   (define-key space-map (kbd "p b") 'counsel-projectile-switch-to-buffer)
   (define-key space-map (kbd "p f") 'counsel-projectile)
   (define-key space-map (kbd "p p") 'counsel-projectile-switch-project)

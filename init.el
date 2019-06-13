@@ -82,7 +82,9 @@
     :defer t
     :init
     (ivy-rich-mode 1)
-    (setq ivy-format-function #'ivy-format-function-line)))
+    (setq ivy-format-function #'ivy-format-function-line))
+  (use-package ivy-hydra
+    :ensure t))
 
 (use-package counsel
   :ensure t
