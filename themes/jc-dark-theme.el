@@ -15,6 +15,7 @@
        (highlight-fg-color (color-lighten-name (color-complement-hex highlight-bg-color) 10))
        (success "#3E8870")
        (warning "#A66F32")
+       (warning-bg (color-darken-name (color-desaturate-name warning 20) 20))
        (error "#A43235")
 
        (added-color (color-darken-name success 20))
@@ -78,7 +79,7 @@
    ;; > Flycheck & Flyspell
    `(flycheck-error ((t (:underline (:style wave :color ,error) :foreground ,error))))
    `(flycheck-warning ((t (:underline (:style wave :color ,warning) :foreground ,warning))))
-   `(flycheck-info ((t (:background ,warning, :foreground ,fg-color))))
+   `(flycheck-info ((t (:background ,warning-bg, :foreground ,fg-color))))
    `(flycheck-fringe-error ((t (:foreground ,error))))
    `(flycheck-fringe-info ((t (:foreground ,error))))
    `(flycheck-fringe-warning ((t (:foreground ,warning))))
