@@ -27,6 +27,7 @@
 (define-key space-map (kbd "f D") 'delete-current-buffer-file)
 (define-key space-map (kbd "f e") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (define-key space-map (kbd "f f") 'counsel-find-file)
+(define-key space-map (kbd "f i") 'insert-file)
 (define-key space-map (kbd "f j") 'dired-jump)
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
 (define-key space-map (kbd "f r") 'counsel-recentf)
