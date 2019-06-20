@@ -54,6 +54,7 @@
 (define-key space-map (kbd "s s") 'swiper)
 
 ;; Windows
+(define-key space-map (kbd "w q") 'server-edit)
 (define-key space-map (kbd "w w") 'evil-window-next)
 (define-key space-map (kbd "w h") 'evil-window-left)
 (define-key space-map (kbd "w j") 'evil-window-down)
