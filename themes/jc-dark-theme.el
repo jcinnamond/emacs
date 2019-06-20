@@ -10,7 +10,7 @@
        (color-0 "#808a87")
        (color-1 "#ae8f63")
        (color-2 "#f73a18")
-       (color-3 "#912917") ; (color-darken-name (color-desaturate-name "#f73a18" 20) 20)
+       (color-3 "#74281a") ; (color-darken-name (color-desaturate-name "#f73a18" 30) 25)
 
        (color-4 "#DF8615")
        (color-5 "#65b016")
