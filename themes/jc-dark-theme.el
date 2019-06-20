@@ -10,15 +10,13 @@
        (color-0 "#808a87")
        (color-1 "#ae8f63")
        (color-2 "#f73a18")
-       (color-3 "#8b233f")
+       (color-3 "#912917") ; (color-darken-name (color-desaturate-name "#f73a18" 20) 20)
 
        (color-4 "#DF8615")
        (color-5 "#65b016")
 
        (color-highlight-background color-3)
        (color-highlight-foreground color-foreground)
-
-       (color-desaturated-highlight-background (color-darken-name (color-desaturate-name color-2 40) 15))
 
        (color-menu-background (color-lighten-name color-background 5))
        (color-menu-selection-background (color-lighten-name color-background 10))
@@ -101,7 +99,7 @@
    `(diff-header ((t (:foreground ,color-foreground :background ,color-highlight-background))))
 
    ;; > Mode line
-   `(mode-line ((t (:foreground ,color-highlight-foreground :background ,color-desaturated-highlight-background))))
+   `(mode-line ((t (:foreground ,color-highlight-foreground :background ,color-3))))
    `(mode-line-inactive ((t (:foreground ,color-foreground :background ,color-menu-selection-background :box ,color-0))))
 
    ;; > Ivy
