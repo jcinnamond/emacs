@@ -28,3 +28,13 @@
 (use-package ag
   :ensure t
   :commands ag)
+
+(defun jc-select-current-line()
+  "Select the current line unless the mark is already active"
+  (interactive)
+  (end-of-line)
+  (set-mark (line-beginning-position)))
+
+(use-package evil
+  :bind (:map evil-visual-state-map
+	      ("a l" . 'jc-select-current-line)))
