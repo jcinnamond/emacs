@@ -20,7 +20,11 @@
     "A" #'evil-mc-make-cursor-in-visual-selection-end
     "I" #'evil-mc-make-cursor-in-visual-selection-beg))
 
+(use-package duplicate-thing
+  :ensure t
+  :bind (:map space-map
+	      ("d" . 'duplicate-thing)))
+
 (use-package ag
   :ensure t
   :commands ag)
-
