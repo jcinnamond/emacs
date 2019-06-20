@@ -7,6 +7,7 @@
   (define-key 'go-comma-map (kbd "d") 'godoc-at-point)
   (define-key 'go-comma-map (kbd "D") 'godoc)
   (define-key 'go-comma-map (kbd "f") 'gofmt)
+  (add-hook 'ruby-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
 			    (setq indent-tabs-mode 1)
