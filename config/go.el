@@ -27,7 +27,9 @@
 
 ;; Use gopls and lsp-mode instead of gocode
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :commands lsp
+  :hook (go-mode . lsp))
 
 (use-package lsp-ui
   :ensure t)
