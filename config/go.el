@@ -10,8 +10,7 @@
   (add-hook 'ruby-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
-			    (setq indent-tabs-mode 1)
-			    (set (make-local-variable 'company-backends) '(company-go))))
+			    (setq indent-tabs-mode 1)))
   (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save))
 
@@ -25,3 +24,13 @@
 	      ("t r" . gorun-rerun)
 	      ("t s" . gorun-test-single)
 	      ("t t" . gorun-test-all)))
+
+;; Use gopls and lsp-mode instead of gocode
+(use-package lsp-mode
+  :ensure t)
+
+(use-package lsp-ui
+  :ensure t)
+
+(use-package company-lsp
+  :ensure t)
