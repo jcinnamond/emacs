@@ -5,6 +5,8 @@
   (define-prefix-command 'go-comma-map)
   (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
   (define-key 'go-comma-map (kbd "d") 'lsp-ui-doc-show)
+  (define-key 'go-comma-map (kbd "f") 'lsp-ui-peek-find-references)
+  (define-key 'go-comma-map (kbd "j") 'lsp-ui-peek-find-definitions)
   (define-key 'go-comma-map (kbd "q") 'lsp-ui-doc-hide)
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
