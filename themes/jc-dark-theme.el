@@ -162,7 +162,8 @@
    ;; Show paren
    `(show-paren-match ((t (:foreground ,color-2))))
 
-   ;; LSP UI
+   ;; LSP
+   `(lsp-face-highlight-textual ((t (:inherit default :foreground ,color-2))))
    `(lsp-ui-doc-background ((t (:background ,color-menu-selection-background))))
    `(lsp-ui-doc-header ((t (:inherit lsp-ui-doc-background :foreground ,color-2))))
    `(lsp-ui-peek-peek ((t (:foreground ,color-foreground))))
