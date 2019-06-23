@@ -40,7 +40,7 @@
    `(underline ((t (:underline t))))
    `(warning ((t (:foreground ,warning))))
 
-   `(font-lock-comment-face ((t (:foreground ,color-1 :background ,color-background :slant normal))))
+   `(font-lock-comment-face ((t (:foreground ,color-1 :slant normal))))
    `(font-lock-comment-delimiter-face ((t (:foreground ,color-0 :slant normal))))
    `(font-lock-doc-face ((t (:foreground ,color-1))))
    `(font-lock-string-face ((t (:foreground ,color-foreground))))
@@ -161,6 +161,18 @@
 
    ;; Show paren
    `(show-paren-match ((t (:foreground ,color-2))))
+
+   ;; LSP UI
+   `(lsp-ui-doc-background ((t (:background ,color-menu-selection-background))))
+   `(lsp-ui-doc-header ((t (:inherit lsp-ui-doc-background :foreground ,color-2))))
+   `(lsp-ui-peek-peek ((t (:foreground ,color-foreground))))
+   `(lsp-ui-peek-list ((t (:background ,color-background))))
+   `(lsp-ui-peek-filename ((t (:foreground ,color-1))))
+   `(lsp-ui-peek-line-number ((t (:foreground ,color-1))))
+   `(lsp-ui-peek-header ((t (:foreground ,color-highlight-foreground :background ,color-highlight-background))))
+   `(lsp-ui-peek-selection ((t (:foreground ,color-foreground :background ,color-menu-selection-background))))
+   `(lsp-ui-peek-highlight ((t (:foreground ,color-foreground))))
+   `(lsp-ui-sideline-code-action ((t (:foreground ,color-2))))
    ))
 
 (provide-theme 'jc-dark)

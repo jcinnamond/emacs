@@ -33,6 +33,7 @@
 (use-package lsp-ui
   :ensure t
   :config
+  (setq-default lsp-ui-doc-position 'at-point)
   (setq-default lsp-ui-sideline-show-hover nil)
   (setq-default lsp-ui-doc-enable nil))
 
