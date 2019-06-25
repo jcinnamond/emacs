@@ -1,6 +1,7 @@
 # Ignore temporary and state-tracking files
 eshell/*
 projectile-bookmarks.eld
+projectile.cache
 recentf
 transient/*
 var/*
