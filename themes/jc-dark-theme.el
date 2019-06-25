@@ -109,7 +109,8 @@
 
    ;; > Org mode
    `(org-level-1 ((t (:foreground ,color-foreground :background ,color-highlight-background))))
-   `(org-todo ((t (:foreground ,warning :weight bold))))
+   `(org-todo ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground :weight bold))))
+   `(org-done ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground :weight bold))))
    `(org-block-begin-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-end-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-background ((t (:foreground ,color-foreground :background ,color-highlight-background))))
