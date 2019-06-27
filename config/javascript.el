@@ -6,5 +6,6 @@
   (define-key 'js-comma-map (kbd "t s") 'dockspec-run-current-line)
   (define-key 'js-comma-map (kbd "t a") 'dockspec-run-all)
   (define-key 'js-comma-map (kbd "t r") 'dockspec-rerun)
+  (setq-default indent-tabs-mode nil)
   (setq-default js-indent-level 2)
   (add-hook 'js-mode-hook 'subword-mode))
