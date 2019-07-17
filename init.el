@@ -143,6 +143,9 @@
 (use-package flycheck
   :ensure t)
 
+(if (string= system-type "darwin")
+    (load "macos"))
+
 (load "lisp-configuration")
 (load "ruby")
 (load "javascript")
