@@ -41,3 +41,6 @@
 
 (use-package company-lsp
   :ensure t)
+
+(use-package protobuf-mode
+  :ensure t)
