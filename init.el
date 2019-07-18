@@ -55,60 +55,8 @@
   (require 'use-package))
 (require 'bind-key)
 
-;; Ivy
-(use-package ivy
-  :ensure t
-  :defer t
-  :init
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d) ")
-  (use-package ivy-rich
-    :ensure t
-    :functions ivy-rich-mode ivy-format-function ivy-format-function-line
-    :defer t
-    :init
-    (ivy-rich-mode 1)
-    (setq ivy-format-function #'ivy-format-function-line))
-  (use-package ivy-hydra
-    :ensure t))
-
-(use-package counsel
-  :ensure t
-  :defer t)
-
-(use-package prescient
-  :ensure t
-  :defer t
-  :config
-  (prescient-persist-mode 1))
-
-(use-package ivy-prescient
-  :ensure t
-  :defer t
-  :init
-  (ivy-prescient-mode 1))
-
-;; KEYBINDINGS
-;;
-;; evil mode
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode t))
-
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode t))
-
-; Use which-key to prompt during key sequences
-(use-package which-key
-  :ensure t
-  :defer t
-  :init
-  (which-key-mode))
-
+(load "ivy")
+(load "keys")
 (load "space-keys")
 
 (load "appearance")
@@ -116,6 +64,9 @@
 (load "selection")
 (load "git")
 (load "autocompletion")
+
+(if (string= system-type "darwin")
+    (load "macos"))
 
 (use-package comment-dwim-2
   :ensure t
@@ -129,9 +80,6 @@
 
 (use-package flycheck
   :ensure t)
-
-(if (string= system-type "darwin")
-    (load "macos"))
 
 (load "lisp-configuration")
 (load "ruby")
