@@ -73,8 +73,6 @@
   :bind (:map space-map
               ("c l" . 'comment-dwim-2)))
 
-(use-package dockspec)
-
 ;; Programming modes
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 
@@ -82,7 +80,6 @@
   :ensure t)
 
 (load "lisp-configuration")
-(load "ruby")
 (load "javascript")
 (load "elm")
 (load "css")
