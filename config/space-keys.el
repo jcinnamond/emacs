@@ -63,6 +63,7 @@
 (define-key space-map (kbd "w d") 'delete-window)
 (define-key space-map (kbd "w D") 'delete-frame)
 (define-key space-map (kbd "w m") 'delete-other-windows)
+(define-key space-map (kbd "w N") 'make-frame-command)
 (define-key space-map (kbd "w /") 'split-window-right)
 (define-key space-map (kbd "w _") 'split-window-below)
 
