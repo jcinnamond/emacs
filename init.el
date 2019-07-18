@@ -5,21 +5,8 @@
 (require 'server)
 (unless (server-running-p) (server-start))
 
-;; Appearance
-;;
-;; Strip back the emacs UI, set up the default font, and load the theme
-(setq inhibit-startup-message t)
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(scroll-bar-mode 0)
-(blink-cursor-mode 0)
-
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(set-frame-parameter nil 'fullscreen 'fullscreen)
 
 (setq ring-bell-function 'ignore)
-
-(show-paren-mode 1)
 
 (global-auto-revert-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
