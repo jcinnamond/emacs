@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: rpc
+# key: rpc
+# --
+rpc ${1:GET$2} ($1Request) returns ($1Response) {
+    option (handler).path = "$3";$0
+}

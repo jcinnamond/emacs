@@ -43,4 +43,7 @@
   :ensure t)
 
 (use-package protobuf-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq-default c-basic-offset 4)
+  (setq-default indent-tabs-mode nil))

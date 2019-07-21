@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: mm
+# key: mm
+# --
+message ${1:GET$2}Request {
+    $0
+}
+
+message $1Response {
+}

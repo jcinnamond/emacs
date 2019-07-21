@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: int32
+# key: int32
+# --
+int32 ${1:name} = ${2:1};$0

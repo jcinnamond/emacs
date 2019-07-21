@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: repeated
+# key: repeated
+# --
+repeated ${1:Thing} ${2:${1:$(ignore-errors (downcase (yas-field-value 1)))}s} = ${3:1};$0
