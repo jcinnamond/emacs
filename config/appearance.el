@@ -32,4 +32,4 @@
 (jc-mode-line-init)
 
 ;; Start in fullscreen
-(set-frame-parameter nil 'fullscreen 'fullscreen)
+(set-frame-parameter nil 'fullscreen 'nil)
