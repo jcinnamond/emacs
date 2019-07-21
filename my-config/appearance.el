@@ -1,3 +1,6 @@
+;;; Set up the theme, font and modeline. This config also sets up some
+;;; appearance related emacs defaults.
+
 ;; Strip back the emacs UI
 (setq inhibit-startup-message t)
 (tool-bar-mode 0)
@@ -10,12 +13,10 @@
 		    :family "Source Code Pro"
 		    :weight 'normal
 		    :width 'normal)
-
-(if (string= (system-name) "windy")
-    (set-face-attribute 'default nil :height 210))
+;; Set the font size in OS specific config or in local config files,
+;; depending on screen configuration.
 
 ;; Load the theme and set a key binding to switch themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'jc-dark)
 
 (define-key space-map (kbd "t") 'counsel-load-theme)
@@ -30,6 +31,3 @@
 ;; Set up the mode line
 (require 'jc-mode-line)
 (jc-mode-line-init)
-
-;; Start in fullscreen
-(set-frame-parameter nil 'fullscreen 'nil)

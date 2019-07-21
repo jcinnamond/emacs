@@ -1,3 +1,7 @@
+# Ignore local config
+local-config/*
+local-lisp/*
+
 # Ignore temporary and state-tracking files
 eshell/*
 projectile-bookmarks.eld

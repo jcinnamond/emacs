@@ -3,7 +3,11 @@
   :defer t
   :after yasnippet
   :init
-  (use-package company-prescient :ensure t :init (company-prescient-mode 1))
+  (use-package company-prescient
+    :ensure t
+    :commands company-prescient-mode
+    :init
+    (company-prescient-mode 1))
   :config
   (define-key company-active-map [tab] yas-maybe-expand))
 
@@ -11,9 +15,10 @@
 
 (use-package yasnippet
   :ensure t
+  :commands yas-global-mode
   :defines yas-maybe-expand
   :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-snippet-dirs '("~/.emacs.d/my-snippets"))
   (yas-global-mode 1)
   :config
   (evil-define-key 'insert 'yas-minor-mode-map (kbd "TAB") yas-maybe-expand)

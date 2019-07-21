@@ -1,6 +1,6 @@
 (use-package ivy
   :ensure t
-  :functions ivy-mode
+  :commands ivy-mode
   :defer t
   :init
   (ivy-mode 1)
@@ -8,7 +8,8 @@
   (setq ivy-count-format "(%d) ")
   (use-package ivy-rich
     :ensure t
-    :functions ivy-rich-mode ivy-format-function ivy-format-function-line
+    :commands ivy-rich-mode
+    :functions ivy-format-function ivy-format-function-line
     :defer t
     :init
     (ivy-rich-mode 1)
@@ -20,16 +21,17 @@
   :ensure t
   :defer t)
 
+;; `prescient` orders ivy suggestions based on usage
 (use-package prescient
   :ensure t
-  :functions prescient-persist-mode
+  :commands prescient-persist-mode
   :defer t
   :config
   (prescient-persist-mode 1))
 
 (use-package ivy-prescient
   :ensure t
-  :functions ivy-prescient-mode
+  :commands ivy-prescient-mode
   :defer t
   :init
   (ivy-prescient-mode 1))

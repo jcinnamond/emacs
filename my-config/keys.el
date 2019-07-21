@@ -1,4 +1,39 @@
-;; Set up menus starting with <space>
+;;; This config is responsible for two main functions. First, it
+;;; setups up evil mode to give me vi-style keybindings. Next, it
+;;; creates a global keymap based on the <space> leader key (an idea
+;;; stolen from spacemacs).
+
+
+;;;----------------------------------------------------------------------
+;;; Set up vi-style keybindings
+
+;; Use evil mode for vi like keybindings
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode t))
+
+;; Helpers for wrapping the selection in parens, quotes, etc
+(use-package evil-surround
+  :ensure t
+  :commands global-evil-surround-mode
+  :config
+  (global-evil-surround-mode t))
+
+
+;;;----------------------------------------------------------------------
+;;; Use which-key to prompt during key sequences
+(use-package which-key
+  :ensure t
+  :commands which-key-mode
+  :init
+  (which-key-mode))
+
+
+;;;----------------------------------------------------------------------
+;;; Set up global keymap using <space> as the leader key. Other parts
+;;; of the configuration might add to this keymap as they define extra
+;;; functionality.
 (define-prefix-command 'space-map)
 (evil-define-key '(normal visual motion emacs) 'global (kbd "SPC") 'space-map)
 (evil-define-key '(normal visual motion emacs) 'magit-mode-map (kbd "SPC") 'space-map)
