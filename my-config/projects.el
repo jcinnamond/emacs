@@ -1,25 +1,15 @@
-;;; Config for working with projects. This sets up `projectile` (for
-;;; now - I'm planning on replacing this) and also configures `magit`.
+;;; Config for working with projects. This sets up bindings to open
+;;; files and also configures `magit`.
 
 ;;;----------------------------------------------------------------------
-;;; Projectile
-(use-package projectile
+;;; Find file in project
+;;;
+;;; Most of my projectile usage is finding files in a project.
+(use-package find-file-in-project
   :ensure t
-  :commands projectile-mode
   :init
-  (projectile-mode 1)
-  (define-key space-map (kbd "p b") 'counsel-projectile-switch-to-buffer)
-  (define-key space-map (kbd "p f") 'counsel-projectile)
-  (define-key space-map (kbd "p p") 'counsel-projectile-switch-project)
-  (define-key space-map (kbd "p t") 'projectile-toggle-between-implementation-and-test)
-
-  (use-package counsel-projectile
-    :ensure t)
-
-  (use-package which-key
-    :commands which-key-add-key-based-replacements
-    :config
-    (which-key-add-key-based-replacements "SPC p" "Projects")))
+  (define-key space-map (kbd "f d") 'find-file-in-current-directory)
+  (define-key space-map (kbd "f p") 'find-file-in-project))
 
 
 ;;;----------------------------------------------------------------------
@@ -27,7 +17,7 @@
 (use-package ag
   :ensure t
   :init
-  (define-key space-map (kbd "p s") 'counsel-projectile-ag))
+  (define-key space-map (kbd "s p") 'counsel-ag))
 
 
 ;;;----------------------------------------------------------------------
