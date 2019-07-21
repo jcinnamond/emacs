@@ -53,8 +53,8 @@
 ;; Next, set up the theme so that errors look lovely if anything else fails.
 (load "appearance")
 
-;; Set up ivy/counsel
-(load "ivy")
+;; Set up ivy/swiper/counsel
+(load "completion")
 
 ;; Packages for selecting or manipulting text
 (load "selection-and-manipulation")

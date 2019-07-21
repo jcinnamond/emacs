@@ -7,17 +7,19 @@
 ;;; Most of my projectile usage is finding files in a project.
 (use-package find-file-in-project
   :ensure t
-  :init
-  (define-key space-map (kbd "f d") 'find-file-in-current-directory)
-  (define-key space-map (kbd "f p") 'find-file-in-project))
+  :commands find-file-in-current-directory find-file-in-project
+  :bind (:map space-map
+              ("f d" . 'find-file-in-current-directory)
+              ("f p" . 'find-file-in-project)))
 
 
 ;;;----------------------------------------------------------------------
 ;;; Searching projects
 (use-package ag
   :ensure t
-  :init
-  (define-key space-map (kbd "s p") 'counsel-ag))
+  :commands counsel-ag
+  :bind (:map space-map
+              ("s p" . 'counsel-ag)))
 
 
 ;;;----------------------------------------------------------------------
@@ -26,6 +28,10 @@
 
 (use-package evil-magit
   :ensure t
+  :init
+  (which-key-add-key-based-replacements "SPC g" "Git")
+  :bind (:map space-map
+              ("g s" . 'magit-status))
   :config
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (add-hook 'magit-mode-hook (lambda () (interactive) (turn-off-evil-mc-mode)))

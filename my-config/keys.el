@@ -39,12 +39,12 @@
 (evil-define-key '(normal visual motion emacs) 'magit-mode-map (kbd "SPC") 'space-map)
 
 ;; Emacs
-(define-key space-map (kbd "SPC") 'counsel-M-x)
+(define-key space-map (kbd "SPC") 'execute-extended-command)
 (define-key space-map (kbd ":") 'eval-expression)
 
 ;; Buffers
 (define-key space-map (kbd "TAB") (lambda () (interactive) (switch-to-buffer (other-buffer))))
-(define-key space-map (kbd "b b") 'ivy-switch-buffer)
+(define-key space-map (kbd "b b") 'switch-to-buffer)
 (define-key space-map (kbd "b d") 'evil-delete-buffer)
 (define-key space-map (kbd "b k") 'kill-buffer)
 (define-key space-map (kbd "b j") 'ibuffer)
@@ -61,19 +61,15 @@
 ;; Files
 (define-key space-map (kbd "f D") 'delete-current-buffer-file)
 (define-key space-map (kbd "f e") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
-(define-key space-map (kbd "f f") 'counsel-find-file)
+(define-key space-map (kbd "f f") 'find-file)
 (define-key space-map (kbd "f i") 'insert-file)
 (define-key space-map (kbd "f j") 'dired-jump)
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
-(define-key space-map (kbd "f r") 'counsel-recentf)
 (define-key space-map (kbd "f s") 'save-some-buffers)
 
 ;; File variables
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
 (define-key space-map (kbd "f v f") 'add-file-local-variable)
-
-;; Git
-(define-key space-map (kbd "g s") 'magit-status)
 
 ;; Insert
 (define-key space-map (kbd "i i") 'insert-char)
@@ -83,10 +79,6 @@
 (define-key space-map (kbd "n k") 'narrow-to-defun-include-comments)
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
-
-;; Searching
-(define-key space-map (kbd "s b") 'swiper-all)
-(define-key space-map (kbd "s s") 'swiper)
 
 ;; Windows
 (define-key space-map (kbd "w q") 'server-edit)
@@ -104,7 +96,6 @@
 
 ;; Set up the prompts in which-key
 (use-package which-key
-  :defer t
   :functions which-key-add-key-based-replacements
   :config
   (which-key-add-key-based-replacements "SPC TAB" "Alternate buffer")
@@ -114,8 +105,6 @@
   (which-key-add-key-based-replacements "SPC f" "Files")
   (which-key-add-key-based-replacements "SPC f e" "Emacs config")
   (which-key-add-key-based-replacements "SPC f v" "File variables")
-  (which-key-add-key-based-replacements "SPC g" "Git")
   (which-key-add-key-based-replacements "SPC i" "Insert")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
-  (which-key-add-key-based-replacements "SPC s" "Searching")
   (which-key-add-key-based-replacements "SPC w" "Windows"))
