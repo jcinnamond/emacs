@@ -26,13 +26,17 @@
   :ensure t
   :hook lsp
 
-  :config
+  :init
   (define-prefix-command 'go-comma-map)
   (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
-  (define-key 'go-comma-map (kbd "d") 'lsp-ui-doc-show)
-  (define-key 'go-comma-map (kbd "f") 'lsp-ui-peek-find-references)
-  (define-key 'go-comma-map (kbd "j") 'lsp-ui-peek-find-definitions)
-  (define-key 'go-comma-map (kbd "q") 'lsp-ui-doc-hide)
+
+  :bind (:map go-comma-map
+              ("d" . lsp-ui-doc-show)
+              ("f" . lsp-ui-peek-find-references)
+              ("j" . lsp-ui-peek-find-definitions)
+              ("q" . lsp-ui-doc-hide))
+
+  :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
@@ -48,6 +52,9 @@
 
 (use-package protobuf-mode
   :ensure t
+  :init
+  (define-prefix-command 'protobuf-comma-map)
+  (evil-define-key '(normal visual motion emacs) protobuf-mode-map (kbd ",") 'protobuf-comma-map)
   :config
   (setq-default c-basic-offset 4)
   (setq-default indent-tabs-mode nil))
