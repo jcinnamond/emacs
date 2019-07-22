@@ -43,27 +43,6 @@
 ;; f.el provides helpers for working with files and directories
 (require 'f)
 
-;; (defgroup gorun nil
-;;   "Library for running a command in a docker container."
-;;   :group 'languages)
-
-;; (defcustom gorun-docker-command "docker exec -i"
-;;   "The command to run other commands in a docker container."
-;;   :type 'string
-;;   :group 'gorun)
-
-;; (defvar gorun--last-command nil)
-
-;; (defun gorun--find-project-root (&optional directory)
-;;   "Finds the root directory of the project by walking the directory tree until it finds a file that looks like it belongs in the directory root."
-;;   (let ((directory (file-name-as-directory (or directory default-directory))))
-;;     (cond ((gorun--filesystem-root-p directory)
-;;      (error "Could not determine the project root."))
-;;     ((file-exists-p (expand-file-name ".git" directory)) directory)
-;;     ((file-exists-p (expand-file-name "go.mod" directory)) directory)
-;;     ((file-exists-p (expand-file-name "Makefile" directory)) directory)
-;;     (t (gorun--find-project-root (file-name-directory (directory-file-name directory)))))))
-
 ;;;----------------------------------------------------------------------
 ;;; Helpers
 
