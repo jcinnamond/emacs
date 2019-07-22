@@ -70,6 +70,13 @@
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
 (define-key space-map (kbd "f v f") 'add-file-local-variable)
 
+;; Help
+(define-key space-map (kbd "h f") 'describe-function)
+(define-key space-map (kbd "h j") 'find-function)
+(define-key space-map (kbd "h k") 'describe-key)
+(define-key space-map (kbd "h m") 'describe-mode)
+(define-key space-map (kbd "h v") 'describe-variable)
+
 ;; Insert
 (define-key space-map (kbd "i i") 'insert-char)
 
@@ -104,6 +111,7 @@
   (which-key-add-key-based-replacements "SPC f" "Files")
   (which-key-add-key-based-replacements "SPC f e" "Emacs config")
   (which-key-add-key-based-replacements "SPC f v" "File variables")
+  (which-key-add-key-based-replacements "SPC h" "Help")
   (which-key-add-key-based-replacements "SPC i" "Insert")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
   (which-key-add-key-based-replacements "SPC w" "Windows"))
