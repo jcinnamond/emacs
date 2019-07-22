@@ -61,6 +61,13 @@
 
 
 ;;;----------------------------------------------------------------------
+;;; Editing cassandra schema definitions
+
+(use-package cql-mode
+  :ensure t)
+
+
+;;;----------------------------------------------------------------------
 ;;; Emacs lisp programming
 (use-package lisp-mode
   :ensure nil
