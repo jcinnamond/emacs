@@ -102,7 +102,7 @@
 
 (defun monorepo--find-service-name ()
   "Calculate the name of the current service from the current path. This is assumed to be one level down from the repo root"
-  (car (f-split (f-relative (f-this-file) (monorepo/repo-root-directory)))))
+  (car (f-split (f-relative (or (f-this-file) default-directory) (monorepo/repo-root-directory)))))
 
 (defun monorepo/compile-in-service (command)
   "Run a command in the service directory"
