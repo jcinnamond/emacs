@@ -109,4 +109,5 @@
   (let ((default-directory (monorepo/service-directory)))
     (compile command)))
 
+(provide 'monorepo)
 ;; monorepo.el ends here
