@@ -80,7 +80,7 @@
 ;;;----------------------------------------------------------------------
 ;;; Machine specific config. Load any files under `local-config`
 (dolist (f (directory-files "~/.emacs.d/local-config" t "\\.el$"))
-        (load f))
+        (load (file-name-sans-extension f)))
 
 ;;;----------------------------------------------------------------------
 ;;; Start a server
