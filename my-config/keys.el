@@ -17,7 +17,7 @@
 (use-package evil-surround
   :ensure t
   :commands global-evil-surround-mode
-  :config
+  :init
   (global-evil-surround-mode t))
 
 
