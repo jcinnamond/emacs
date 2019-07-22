@@ -65,7 +65,6 @@
 (define-key space-map (kbd "f i") 'insert-file)
 (define-key space-map (kbd "f j") 'dired-jump)
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
-(define-key space-map (kbd "f s") 'save-some-buffers)
 
 ;; File variables
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
