@@ -14,6 +14,8 @@
   :config
   (setq-default lsp-ui-doc-position 'at-point)
   (setq-default lsp-ui-sideline-show-hover nil)
+  (setq-default lsp-ui-sideline-show-code-actions nil)
+  (setq-default lsp-ui-flycheck-enable t)
   (setq-default lsp-ui-doc-enable nil))
 
 (use-package company-lsp :ensure t)
@@ -24,7 +26,6 @@
 
 (use-package go-mode
   :ensure t
-  :hook lsp
 
   :init
   (define-prefix-command 'go-comma-map)
@@ -38,6 +39,9 @@
 
   :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
+  (add-hook 'go-mode-hook 'subword-mode)
+  (add-hook 'go-mode-hook 'lsp-ui-mode)
+  (add-hook 'go-mode-hook 'flycheck-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
 			    (setq indent-tabs-mode t)))
