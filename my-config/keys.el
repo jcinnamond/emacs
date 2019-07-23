@@ -48,6 +48,15 @@
 (define-key space-map (kbd "b d") 'evil-delete-buffer)
 (define-key space-map (kbd "b k") 'kill-buffer)
 (define-key space-map (kbd "b j") 'ibuffer)
+(define-key space-map (kbd "b o") 'switch-to-buffer-other-window)
+
+(defun peek-buffer (buffer-or-name)
+  "Open buffer in another window without focusing"
+  (interactive (list (read-buffer-to-switch "Peek buffer: ")))
+  (let ((pop-up-windows t))
+    (pop-to-buffer buffer-or-name nil nil)
+    (other-window -1)))
+(define-key space-map (kbd "b p") 'peek-buffer)
 
 ;; Compile / Comments
 (define-key space-map (kbd "c c") 'compile)
@@ -65,6 +74,7 @@
 (define-key space-map (kbd "f i") 'insert-file)
 (define-key space-map (kbd "f j") 'dired-jump)
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
+(define-key space-map (kbd "f o") 'find-file-other-window)
 
 ;; File variables
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
@@ -97,6 +107,8 @@
 (define-key space-map (kbd "w D") 'delete-frame)
 (define-key space-map (kbd "w m") 'delete-other-windows)
 (define-key space-map (kbd "w N") 'make-frame-command)
+(define-key space-map (kbd "w o b") 'scroll-other-window-down)
+(define-key space-map (kbd "w o f") 'scroll-other-window)
 (define-key space-map (kbd "w /") 'split-window-right)
 (define-key space-map (kbd "w _") 'split-window-below)
 
