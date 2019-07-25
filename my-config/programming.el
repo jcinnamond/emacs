@@ -7,7 +7,11 @@
 
 ;;;----------------------------------------------------------------------
 ;;; Use LSP for better ide-like functions
-(use-package lsp-mode :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :config
+  (setq-default lsp-prefer-flymake nil)
+  (setq-default lsp-enable-links nil))
 
 (use-package lsp-ui
   :ensure t
@@ -40,8 +44,6 @@
   :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
   (add-hook 'go-mode-hook 'subword-mode)
-  (add-hook 'go-mode-hook 'lsp-ui-mode)
-  (add-hook 'go-mode-hook 'flycheck-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
 			    (setq indent-tabs-mode t)))
@@ -49,6 +51,17 @@
   (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package company-go :ensure t)
+
+;; Hook up lsp
+(use-package lsp-mode
+  :hook (go-mode . lsp)
+  :bind (:map go-comma-map
+              ("d" . lsp-ui-peek-jump-backward)
+              ("d" . lsp-ui-doc-show)
+              ("e" . lsp-ui-flycheck-list)
+              ("f" . lsp-ui-peek-find-references)
+              ("j" . lsp-ui-peek-find-definitions)
+              ("q" . lsp-ui-doc-hide)))
 
 
 ;;;----------------------------------------------------------------------
@@ -68,7 +81,10 @@
 ;;; Editing cassandra schema definitions
 
 (use-package cql-mode
-  :ensure t)
+  :ensure t
+  :init
+  (define-prefix-command 'cql-comma-map)
+  (evil-define-key '(normal visual motion emacs) cql-mode-map (kbd ",") 'cql-comma-map))
 
 
 ;;;----------------------------------------------------------------------
