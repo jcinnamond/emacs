@@ -163,6 +163,9 @@
    ;; Show paren
    `(show-paren-match ((t (:foreground ,color-2))))
 
+   ;; Shell scripts
+   `(sh-quoted-exec ((t (:foreground ,color-0))))
+
    ;; LSP
    `(lsp-face-highlight-textual ((t (:inherit default :foreground ,color-2))))
    `(lsp-ui-doc-background ((t (:background ,color-menu-selection-background))))
