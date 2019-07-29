@@ -58,7 +58,7 @@
 (use-package lsp-mode
   :hook (go-mode . lsp)
   :bind (:map go-comma-map
-              ("l d" . lsp-ui-peek-jump-backward)
+              ("l b" . lsp-ui-peek-jump-backward)
               ("l d" . lsp-ui-doc-show)
               ("l e" . lsp-ui-flycheck-list)
               ("l f" . lsp-ui-peek-find-references)
