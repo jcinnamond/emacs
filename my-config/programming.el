@@ -28,6 +28,8 @@
 ;;;----------------------------------------------------------------------
 ;;; Go programming
 
+(require 'go-extra)
+
 (use-package go-mode
   :ensure t
 
@@ -36,10 +38,10 @@
   (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
 
   :bind (:map go-comma-map
-              ("d" . lsp-ui-doc-show)
-              ("f" . lsp-ui-peek-find-references)
-              ("j" . lsp-ui-peek-find-definitions)
-              ("q" . lsp-ui-doc-hide))
+              ("a" . go-extra/go-switch-to-alternative)
+              ("c" . go-extra/compile)
+              ("r" . go-extra/run)
+              ("t t" . go-extra/test))
 
   :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
@@ -56,12 +58,12 @@
 (use-package lsp-mode
   :hook (go-mode . lsp)
   :bind (:map go-comma-map
-              ("d" . lsp-ui-peek-jump-backward)
-              ("d" . lsp-ui-doc-show)
-              ("e" . lsp-ui-flycheck-list)
-              ("f" . lsp-ui-peek-find-references)
-              ("j" . lsp-ui-peek-find-definitions)
-              ("q" . lsp-ui-doc-hide)))
+              ("l d" . lsp-ui-peek-jump-backward)
+              ("l d" . lsp-ui-doc-show)
+              ("l e" . lsp-ui-flycheck-list)
+              ("l f" . lsp-ui-peek-find-references)
+              ("l j" . lsp-ui-peek-find-definitions)
+              ("l q" . lsp-ui-doc-hide)))
 
 
 ;;;----------------------------------------------------------------------

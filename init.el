@@ -79,6 +79,11 @@
 
 ;;;----------------------------------------------------------------------
 ;;; Machine specific config. Load any files under `local-config`
+
+;; Allow require to work with local packages
+(let ((default-directory  "~/.emacs.d/local-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 (dolist (f (directory-files "~/.emacs.d/local-config" t "\\.el$"))
         (load (file-name-sans-extension f)))
 

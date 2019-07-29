@@ -109,5 +109,11 @@
   (let ((default-directory (monorepo/service-directory)))
     (compile command)))
 
+(defun monorepo/find-file-in-service ()
+  "Find a file under the current service directory"
+  (interactive)
+  (let ((default-directory (monorepo/service-directory)))
+    (find-file-in-current-directory)))
+
 (provide 'monorepo)
 ;; monorepo.el ends here

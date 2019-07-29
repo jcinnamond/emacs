@@ -2,15 +2,29 @@
 ;;; files and also configures `magit`.
 
 ;;;----------------------------------------------------------------------
+;;; Set and use the project root
+(defvar my-config/override-project-root-directory nil)
+
+(defun my-config/project-root-directory ()
+  "Return the project root directory or the current directory"
+  (or my-config/override-project-root-directory default-directory))
+
+(defmacro my-config/run-in-root (body)
+  `(let ((default-directory (my-config/project-root-directory)))
+     ,body))
+
+
+;;;----------------------------------------------------------------------
 ;;; Find file in project
 ;;;
 ;;; Most of my projectile usage is finding files in a project.
 (use-package find-file-in-project
   :ensure t
-  :commands find-file-in-current-directory find-file-in-project
+  :commands find-file-in-current-directory find-file-in-project find-file-in-project-by-selected
   :bind (:map space-map
               ("f d" . 'find-file-in-current-directory)
-              ("f p" . 'find-file-in-project)))
+              ("f p" . 'find-file-in-project-by-selected)
+              ("f s" . 'find-file-in-project)))
 
 
 ;;;----------------------------------------------------------------------
