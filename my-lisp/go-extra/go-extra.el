@@ -94,6 +94,11 @@
   (interactive)
   (go-extra--run-command "go test"))
 
+(defun go-extra/test-single ()
+  "Run the current test"
+  (interactive)
+  (compile (format "go test -run %s" (go--function-name))))
+
 
 (provide 'go-extra)
 ;; go-extra.el ends here

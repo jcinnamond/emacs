@@ -38,10 +38,11 @@
   (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
 
   :bind (:map go-comma-map
-              ("a" . go-extra/go-switch-to-alternative)
+              ("a" . go-extra/switch-to-alternative)
               ("c" . go-extra/compile)
               ("r" . go-extra/run)
-              ("t t" . go-extra/test))
+              ("t t" . go-extra/test)
+              ("t s" . go-extra/test-single))
 
   :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
