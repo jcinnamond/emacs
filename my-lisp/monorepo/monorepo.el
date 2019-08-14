@@ -43,6 +43,9 @@
 ;; f.el provides helpers for working with files and directories
 (require 'f)
 
+;; jc-compile provides a helper to run compilaton in a named buffer
+(require 'jc-compile)
+
 ;;;----------------------------------------------------------------------
 ;;; Helpers
 
@@ -80,10 +83,11 @@
     (and (file-exists-p git-dir)
          (file-directory-p git-dir))))
 
-(defun monorepo/compile-in-repo (command)
+(defun monorepo/compile-in-repo (command &optional name)
   "Run a command in the repo root directory"
-  (let ((default-directory (monorepo/repo-root-directory)))
-    (compile command)))
+  (let ((default-directory (monorepo/repo-root-directory))
+        (buffer-name (or name "* compilation *")))
+    (jc-compile/compile command buffer-name)))
 
 ;;;----------------------------------------------------------------------
 ;;; Working with the current service

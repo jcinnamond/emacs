@@ -61,6 +61,10 @@
 ;;----------------------------------------------------------------------
 ;; Commands for running go
 
+(require 'jc-compile)
+
+(defconst go-extra/test-buffer-name "* Go Test *")
+(defconst go-extra/compile-buffer-name "* Go *")
 
 (defvar go-extra/package-directory nil "the directory containing the current package")
 
@@ -75,29 +79,29 @@
   (let ((final-part (or file "...")))
     (format "%s/%s" (go-extra--package-directory) final-part)))
 
-(defun go-extra--run-command (command &optional path)
+(defun go-extra--run-command (command name &optional path)
   "Build and run a command"
-  (my-config/run-in-root (compile (format "%s %s" command (go-extra--build-path path)))))
+  (my-config/run-in-root (jc-compile/compile (format "%s %s" command (go-extra--build-path path)) name)))
 
 (defun go-extra/compile ()
   "Compile the current directory"
   (interactive)
-  (go-extra--run-command "go build"))
+  (go-extra--run-command "go build" go-extra/compile-buffer-name))
 
 (defun go-extra/run ()
   "Run the current directory"
   (interactive)
-  (go-extra--run-command "go run" "main.go"))
+  (go-extra--run-command "go run" go-extra/compile-buffer-name "main.go"))
 
 (defun go-extra/test ()
   "Test the current directory"
   (interactive)
-  (go-extra--run-command "go test"))
+  (go-extra--run-command "go test" go-extra/test-buffer-name))
 
 (defun go-extra/test-single ()
   "Run the current test"
   (interactive)
-  (compile (format "go test -run %s" (go--function-name))))
+  (jc-compile/compile (format "go test -run %s" (go--function-name)) go-extra/test-buffer-name))
 
 
 (provide 'go-extra)
