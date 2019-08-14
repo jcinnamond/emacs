@@ -96,6 +96,9 @@
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
 
+;; Make the font bigger when sharing the screen
+(define-key space-map (kbd "p") 'screen-sharing/toggle)
+
 ;; Windows
 (define-key space-map (kbd "w q") 'server-edit)
 (define-key space-map (kbd "w w") 'evil-window-next)
