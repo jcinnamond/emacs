@@ -101,7 +101,7 @@
 (defun go-extra/test-single ()
   "Run the current test"
   (interactive)
-  (jc-compile/compile (format "go test -run %s" (go--function-name)) go-extra/test-buffer-name))
+  (jc-compile/compile (format "go test -run %s" (go--function-name t)) go-extra/test-buffer-name))
 
 
 (provide 'go-extra)
