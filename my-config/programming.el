@@ -64,8 +64,9 @@
               ("l e" . lsp-ui-flycheck-list)
               ("l f" . lsp-ui-peek-find-references)
               ("l j" . lsp-ui-peek-find-definitions)
-              ("l q" . lsp-ui-doc-hide)))
-
+              ("l q" . lsp-ui-doc-hide)
+              ("l r" . lsp-rename)
+              ("l R" . lsp-workspace-restart)))
 
 ;;;----------------------------------------------------------------------
 ;;; Editing protobuf files
