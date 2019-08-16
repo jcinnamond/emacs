@@ -2,6 +2,7 @@
 # name: rpc
 # key: rpc
 # --
-rpc ${1:GET$2} ($1Request) returns ($1Response) {
-    option (handler).path = "$3";$0
+rpc ${1:GET$2}($1Request) returns ($1Response) {
+    option (handler).method = "${3:GET}";
+    option (handler).path = "$4";$0
 }
