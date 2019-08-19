@@ -117,3 +117,15 @@
   :ensure t
   :config
   (add-hook 'markdown-mode-hook 'flyspell-mode))
+
+
+;;;----------------------------------------------------------------------
+;;; Editing Javascript
+(use-package js
+  :ensure nil
+  :config
+  (setq-default js-level-indent 2))
+
+(use-package prettier-js
+  :ensure t
+  :hook js-mode)
