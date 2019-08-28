@@ -108,9 +108,9 @@
    `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-0))))
 
    ;; > Org mode
-   `(org-level-1 ((t (:foreground ,color-foreground :background ,color-highlight-background))))
-   `(org-todo ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground :weight bold))))
-   `(org-done ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground :weight normal :strike-through t))))
+   `(org-level-1 ((t (:foreground ,color-1))))
+   `(org-todo ((t (:foreground ,color-2 :weight bold))))
+   `(org-done ((t (:foreground ,color-0 :weight normal :strike-through t))))
    `(org-block-begin-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-end-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-background ((t (:foreground ,color-foreground :background ,color-highlight-background))))
