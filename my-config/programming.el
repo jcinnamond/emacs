@@ -129,3 +129,9 @@
 (use-package prettier-js
   :ensure t
   :hook js-mode)
+
+
+;;;----------------------------------------------------------------------
+;;; Editing Graphql
+(use-package graphql
+  :ensure t)
