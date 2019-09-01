@@ -76,6 +76,9 @@
 (if (file-exists-p (format "~/.emacs.d/my-config/%s.el" system-type))
     (load (symbol-name system-type)))
 
+;; Load any host-specific overrides
+(if (file-exists-p (format "~/.emacs.d/my-config/%s.el" (system-name)))
+    (load (system-name)))
 
 ;;;----------------------------------------------------------------------
 ;;; Machine specific config. Load any files under `local-config`
