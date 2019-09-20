@@ -124,7 +124,7 @@
 (use-package js
   :ensure nil
   :config
-  (setq-default js-level-indent 2))
+  (setq-default js-indent-level 2))
 
 (use-package prettier-js
   :ensure t
