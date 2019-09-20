@@ -135,3 +135,8 @@
 ;;; Editing Graphql
 (use-package graphql
   :ensure t)
+
+;;;----------------------------------------------------------------------
+;;; Editing shells
+(use-package fish-mode
+  :ensure t)
