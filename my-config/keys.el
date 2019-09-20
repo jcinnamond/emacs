@@ -75,6 +75,7 @@
 (define-key space-map (kbd "f j") 'dired-jump)
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
 (define-key space-map (kbd "f o") 'find-file-other-window)
+(define-key space-map (kbd "f t") (lambda () (interactive) (set-buffer-modified-p t) (save-buffer)))
 
 ;; File variables
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
@@ -125,6 +126,7 @@
   (which-key-add-key-based-replacements "SPC c" "Compile / Comments")
   (which-key-add-key-based-replacements "SPC f" "Files")
   (which-key-add-key-based-replacements "SPC f e" "Emacs config")
+  (which-key-add-key-based-replacements "SPC f t" "Touch file")
   (which-key-add-key-based-replacements "SPC f v" "File variables")
   (which-key-add-key-based-replacements "SPC h" "Help")
   (which-key-add-key-based-replacements "SPC i" "Insert")
