@@ -11,7 +11,7 @@
   (which-key-add-key-based-replacements "SPC s" "Searching")
   :bind (:map space-map
               ("s b" . swiper-all)
-              ("s s" . swiper)))
+              ("s s" . (lambda () (interactive) (swiper (thing-at-point 'word))))))
 
 (use-package ivy-hydra :ensure t)
 
