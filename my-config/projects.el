@@ -45,9 +45,10 @@
   :init
   (which-key-add-key-based-replacements "SPC g" "Git")
   :bind (:map space-map
-              ("g s" . 'magit-status)
+              ("g a" . 'vc-annotate)
+              ("g f" . 'github-browse-file)
               ("g g" . 'github-browse-commit)
-              ("g f" . 'github-browse-file))
+              ("g s" . 'magit-status))
   :config
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (add-hook 'magit-mode-hook (lambda () (interactive) (turn-off-evil-mc-mode)))
