@@ -68,16 +68,11 @@
 
 (defvar go-extra/package-directory nil "the directory containing the current package")
 
-(defun go-extra--package-directory ()
-  "Return or calcualte the directory for running go commands"
-  (if (bound-and-true-p go-extra/package-directory)
-      go-extra/package-directory
-    (setq-local go-extra/package-directory ".")))
-
 (defun go-extra--build-path (&optional file)
   "Return the path to a file or directory, for passing to a go command"
-  (let ((final-part (or file "...")))
-    (format "%s/%s" (go-extra--package-directory) final-part)))
+  (if (bound-and-true-p go-extra/package-directory)
+      (format "%s/%s" (go-extra--package-directory) (or file "..."))
+    "."))
 
 (defun go-extra--run-command (command name &optional path)
   "Build and run a command"
@@ -93,16 +88,26 @@
   (interactive)
   (go-extra--run-command "go run" go-extra/compile-buffer-name "main.go"))
 
+(defvar go-extra--last-test-command nil)
+
 (defun go-extra/test ()
   "Test the current directory"
   (interactive)
+  (setq go-extra--last-test-command nil)
   (go-extra--run-command "go test" go-extra/test-buffer-name))
 
-(defun go-extra/test-single ()
+(defun go-extra/test-single (&optional command)
   "Run the current test"
   (interactive)
-  (jc-compile/compile (format "go test -run %s" (go--function-name t)) go-extra/test-buffer-name))
+  (setq go-extra--last-test-command (or command (format "go test -run %s" (go--function-name t))))
+  (jc-compile/compile go-extra--last-test-command go-extra/test-buffer-name))
 
+(defun go-extra/rerun-test ()
+  "Rerun the previous test"
+  (interactive)
+  (if go-extra--last-test-command
+      (go-extra/test-single go-extra--last-test-command)
+    (go-extra/test)))
 
 (provide 'go-extra)
 ;; go-extra.el ends here

@@ -41,8 +41,9 @@
               ("a" . go-extra/switch-to-alternative)
               ("c" . go-extra/compile)
               ("r" . go-extra/run)
-              ("t t" . go-extra/test)
-              ("t s" . go-extra/test-single))
+              ("t r" . go-extra/rerun-test)
+              ("t s" . go-extra/test-single)
+              ("t t" . go-extra/test))
 
   :config
   (add-hook 'go-mode-hook 'flyspell-prog-mode)
