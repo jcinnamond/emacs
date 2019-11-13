@@ -1,14 +1,14 @@
-;;; prescient.el --- Better sorting and filtering. -*- lexical-binding: t -*-
+;;; prescient.el --- Better sorting and filtering -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017-2018 Radon Rosborough
 
 ;; Author: Radon Rosborough <radon.neon@gmail.com>
 ;; Homepage: https://github.com/raxod502/prescient.el
 ;; Keywords: extensions
-;; Package-Version: 20190411.125
+;; Package-Version: 20191025.347
 ;; Created: 7 Aug 2017
 ;; Package-Requires: ((emacs "25.1"))
-;; Version: 3.0
+;; Version: 3.3
 
 ;;; Commentary:
 
@@ -79,14 +79,6 @@ will be discarded. See also `prescient-frequency-decay'."
 This only has an effect if `prescient-persist-mode' is enabled."
   :type 'file)
 
-(defvar prescient--filter-method-custom-type
-  '(set
-    (const :tag "Literal" literal)
-    (const :tag "Regexp" regexp)
-    (const :tag "Initialism" initialism)
-    (const :tag "Fuzzy" fuzzy))
-  "Value for `:type' field in `prescient-filter-method' defcustom.")
-
 (defcustom prescient-filter-method '(literal regexp initialism)
   "How to interpret prescient.el filtering queries.
 Queries are first split on spaces (with two consecutive spaces
@@ -113,7 +105,31 @@ case each method will be applied in order until one matches.
 For backwards compatibility, the value of this variable can also
 be `literal+initialism', which equivalent to the list (`literal'
 `initialism')."
-  :type prescient--filter-method-custom-type)
+  :type '(set
+          (const :tag "Literal" literal)
+          (const :tag "Regexp" regexp)
+          (const :tag "Initialism" initialism)
+          (const :tag "Fuzzy" fuzzy)))
+
+(defcustom prescient-sort-length-enable t
+  "Whether to sort candidates by length.
+If non-nil, then candidates with identical recency and frequency
+will be sorted by length. If nil, then they will be left in the
+order of the original collection.
+
+It might be desirable to set this variable to nil (via
+`company-prescient-sort-length-enable') when working with a
+Company backend which returns fuzzy-matched results that cannot
+usefully be sorted by length (presumably, the backend returns
+these results in some already-sorted order)."
+  :type 'boolean)
+
+(defcustom prescient-aggressive-file-save nil
+  "Whether to save the cache file aggressively.
+If non-nil, then write the cache data to `prescient-save-file'
+after the cache data is updated by `prescient-remember' when
+`prescient-persist-mode' is activated."
+  :type 'boolean)
 
 ;;;; Caches
 
@@ -122,6 +138,18 @@ be `literal+initialism', which equivalent to the list (`literal'
 The keys are candidates as strings and the values are 0-based
 indices, less than `prescient-history-length'. The number of
 values will be at most `prescient-history-length'.")
+
+(defun prescient--history-as-list ()
+  "Return a list of the most recently chosen candidates as strings.
+The most recently chosen candidates are at the front of the
+list. This function is mostly useful for debugging."
+  (let ((history (make-vector prescient-history-length nil)))
+    (maphash
+     (lambda (cand index)
+       (ignore-errors
+         (aset history index cand)))
+     prescient--history)
+    (cl-remove nil (append history nil))))
 
 (defvar prescient--frequency (make-hash-table :test 'equal)
   "Hash table of frequently chosen candidates.
@@ -219,7 +247,7 @@ as a sub-query delimiter."
       ;; Return an empty subquery list.
       (unless (<= (length query) 1)
         ;; Otherwise, the number of spaces should be reduced by one.
-        (substring query 1))
+        (list (substring query 1)))
     ;; Trim off a single space from the beginning and end, if present.
     ;; Otherwise, they would generate empty splits and cause us to
     ;; match literal whitespace.
@@ -283,12 +311,29 @@ capture groups matching \"f\" and \"a\"."
              query
              "\\W*"))
 
-;; Remove this and do not document further changes in CHANGELOG after
-;; six months or two releases, whichever comes later.
-(define-obsolete-function-alias
-  'prescient-initials-regexp
-  'prescient--initials-regexp
-  "2018-07-29")
+(defun prescient--fuzzy-regexp (query &optional with-groups)
+  "Return a regexp for fuzzy-matching QUERY.
+This means that the regexp will only match a given string if
+all characters in QUERY are present anywhere in the string in
+the specified order.
+
+If WITH-GROUPS is non-nil, enclose the parts of the regexp that
+match the QUERY characters in capture groups, so that the match
+data can be used to highlight the matched substrings."
+  (let ((chars (string-to-list query)))
+    (concat
+     (prescient--with-group
+      (regexp-quote
+       (char-to-string (car chars)))
+      with-groups)
+     (mapconcat
+      (lambda (char)
+        (format "[^%c\n]*%s" char
+                (prescient--with-group
+                 (regexp-quote
+                  (char-to-string char))
+                 with-groups)))
+      (cdr chars) ""))))
 
 ;;;; Sorting and filtering
 
@@ -320,13 +365,7 @@ enclose literal substrings with capture groups."
                (string-match-p subquery "")
                subquery))
             (`fuzzy
-             (mapconcat
-              (lambda (char)
-                (prescient--with-group
-                 (regexp-quote
-                  (char-to-string char))
-                 with-groups))
-              subquery ".*"))))
+             (prescient--fuzzy-regexp subquery with-groups))))
         (pcase prescient-filter-method
           ;; We support `literal+initialism' for backwards
           ;; compatibility.
@@ -361,7 +400,10 @@ list. Do not modify CANDIDATES."
 If `prescient-persist-mode' is enabled, then ensure that usage
 data has been loaded from `prescient-save-file' before comparing.
 Loading will only be attempted once, not before every
-comparison."
+comparison.
+
+If `prescient-sort-length-enable' is nil, then do not sort by
+length."
   (unless (stringp c1)
     (setq c1 (format "%s" c1)))
   (unless (stringp c2)
@@ -376,6 +418,7 @@ comparison."
                    (f2 (gethash c2 prescient--frequency 0)))
                (or (> f1 f2)
                    (and (= f1 f2)
+                        prescient-sort-length-enable
                         (< (length c1)
                            (length c2)))))))))
 
@@ -427,7 +470,11 @@ Return the sorted list. The original is modified destructively."
                  (puthash cand new-freq prescient--frequency))))
            prescient--frequency)
   ;; Update serial number.
-  (cl-incf prescient--serial-number))
+  (cl-incf prescient--serial-number)
+  ;; Save the cache data.
+  (when (and prescient-persist-mode
+	     prescient-aggressive-file-save)
+    (prescient--save)))
 
 ;;;; Closing remarks
 

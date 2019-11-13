@@ -5,10 +5,10 @@
 ;; Author: Radon Rosborough <radon.neon@gmail.com>
 ;; Homepage: https://github.com/raxod502/prescient.el
 ;; Keywords: extensions
-;; Package-Version: 20190414.1641
+;; Package-Version: 20191026.1903
 ;; Created: 7 Aug 2017
-;; Package-Requires: ((emacs "25.1") (prescient "3.0") (ivy "0.11.0"))
-;; Version: 3.0
+;; Package-Requires: ((emacs "25.1") (prescient "3.3") (ivy "0.11.0"))
+;; Version: 3.3
 
 ;;; Commentary:
 
@@ -34,12 +34,21 @@
 
 ;;;; User options
 
-(defcustom ivy-prescient-sort-commands '(counsel-find-library)
-  "Commands for which candidates should always be sorted.
-This allows you to enable sorting for commands which call
-`ivy-read' with a nil value for `:sort'."
+(defcustom ivy-prescient-sort-commands '(:not swiper ivy-switch-buffer)
+  "Control which commands have their candidates sorted by `ivy-prescient'.
+If nil, then sorting is disabled for all commands. If t, then
+sorting is enabled for all commands. If a list of commands, then
+only those commands have their candidates sorted. If a list
+starting with the symbol `:not', then all commands *except* the
+ones listed have their candidates sorted.
+
+Note that this variable overrides the sorting options of Ivy,
+unless `ivy-prescient-enable-sorting' is nil in which case it has
+no effect."
   :group 'prescient
-  :type '(list symbol))
+  :type '(choice (boolean :tag "Unconditional")
+                 (repeat :tag "Whitelist" function)
+                 (cons (const :not) (repeat :tag "Blacklist" function))))
 
 (defcustom ivy-prescient-retain-classic-highlighting nil
   "Whether to emulate the way Ivy highlights candidates as closely as possible.
@@ -113,13 +122,15 @@ arbitrary candidates to be compared; they need not be strings."
     (setq c2 (car c2)))
   (prescient-sort-compare c1 c2))
 
-(defvar ivy-prescient--old-ivy-sort-function nil
-  "Previous default value in `ivy-sort-functions-alist'.")
+(defvar ivy-prescient--old-ivy-sort-functions-alist nil
+  "Previous values from `ivy-sort-functions-alist'.
+When `ivy-prescient-mode' is disabled, all of the elements of
+this alist are used to update `ivy-sort-functions-alist'.")
 
-(defvar ivy-prescient--old-ivy-sort-file-function nil
-  "Previous value for sorting files in `ivy-sort-functions-alist'.
+(defvar ivy-prescient--old-ivy-sort-matches-completion-in-region-function nil
+  "Previous value for sorting `completion-in-region' results.
 This is the value that was associated to
-`read-file-name-internal'.")
+`ivy-completion-in-region' in `ivy-sort-matches-functions-alist'.")
 
 (defvar ivy-prescient--old-initial-inputs-alist nil
   "Previous value of `ivy-initial-inputs-alist'.")
@@ -155,12 +166,22 @@ that also invokes `prescient-remember'."
 
 (defun ivy-prescient--enable-sort-commands (args)
   "Enable sorting of `ivy-prescient-sort-commands'.
-If the `:caller' in ARGS is a member of
-`ivy-prescient-sort-commands', then `:sort' is unconditionally
-enabled."
-  (append args (and (memq (plist-get args :caller)
-                          ivy-prescient-sort-commands)
-                    '(:sort t))))
+If the `:caller' in ARGS should be sorted according to
+`ivy-prescient-sort-commands', then `:sort' is enabled even if
+wasn't in the call to `ivy-read'."
+  (when (or (and (symbolp ivy-prescient-sort-commands)
+                 ivy-prescient-sort-commands)
+            (and (listp ivy-prescient-sort-commands)
+                 (if (eq (car ivy-prescient-sort-commands) :not)
+                     (not (memq (plist-get args :caller)
+                                (cdr ivy-prescient-sort-commands)))
+                   (memq (plist-get args :caller)
+                         ivy-prescient-sort-commands))))
+    ;; Put it at the end so it doesn't override a value that's already
+    ;; there. (I.e., you can explicitly pass `:sort nil' to disable
+    ;; sorting.)
+    (setq args (append args '(:sort t))))
+  args)
 
 ;;;###autoload
 (define-minor-mode ivy-prescient-mode
@@ -177,13 +198,25 @@ enabled."
                      ivy-initial-inputs-alist
                      nil))
         (when ivy-prescient-enable-sorting
-          (cl-shiftf ivy-prescient--old-ivy-sort-function
-                     (alist-get t ivy-sort-functions-alist)
-                     #'ivy-prescient-sort-function)
-          (cl-shiftf ivy-prescient--old-ivy-sort-file-function
-                     (alist-get #'read-file-name-internal
-                                ivy-sort-functions-alist)
-                     #'ivy-prescient-sort-function)
+          ;; Not sure if `map-apply' (note that `map-do' is not
+          ;; available before Emacs 26) handles mutation of alist
+          ;; during iteration. Use `map-keys' plus `dolist' to be
+          ;; safe.
+          (dolist (caller (map-keys ivy-sort-functions-alist))
+            (when (memq (alist-get caller ivy-sort-functions-alist)
+                        '(ivy-string< ivy-sort-file-function-default))
+              ;; Use `ignore' to silence byte-compiler. We only use
+              ;; the setter, not the getter.
+              (ignore
+               (cl-shiftf
+                (alist-get caller ivy-prescient--old-ivy-sort-functions-alist)
+                (alist-get caller ivy-sort-functions-alist)
+                #'ivy-prescient-sort-function))))
+          (cl-shiftf
+           ivy-prescient--old-ivy-sort-matches-completion-in-region-function
+           (alist-get #'ivy-completion-in-region
+                      ivy-sort-matches-functions-alist)
+           nil)
           (advice-add #'ivy-read :filter-args
                       #'ivy-prescient--enable-sort-commands)
           (advice-add #'ivy--directory-enter :filter-return
@@ -194,17 +227,20 @@ enabled."
                  #'ivy-prescient-re-builder)
       (setf (alist-get t ivy-re-builders-alist)
             ivy-prescient--old-re-builder))
-    (when (equal (alist-get t ivy-sort-functions-alist)
-                 #'ivy-prescient-sort-function)
-      (setf (alist-get t ivy-sort-functions-alist)
-            ivy-prescient--old-ivy-sort-function))
-    (when (equal (alist-get #'read-file-name-internal
-                            ivy-sort-functions-alist)
-                 #'ivy-prescient-sort-function)
-      (setf (alist-get #'read-file-name-internal ivy-sort-functions-alist)
-            ivy-prescient--old-ivy-sort-file-function))
-    (unless ivy-initial-inputs-alist
-      (dolist (pair (reverse ivy-prescient--old-initial-inputs-alist))
+    (map-apply (lambda (caller function)
+                 (when (equal (alist-get caller ivy-sort-functions-alist)
+                              #'ivy-prescient-sort-function)
+                   (setf (alist-get caller ivy-sort-functions-alist)
+                         function)))
+               ivy-prescient--old-ivy-sort-functions-alist)
+    (setq ivy-prescient--old-ivy-sort-functions-alist nil)
+    (unless (alist-get #'ivy-completion-in-region
+                       ivy-sort-matches-functions-alist)
+      (setf (alist-get #'ivy-completion-in-region
+                       ivy-sort-matches-functions-alist)
+            ivy-prescient--old-ivy-sort-matches-completion-in-region-function))
+    (dolist (pair (reverse ivy-prescient--old-initial-inputs-alist))
+      (unless (alist-get (car pair) ivy-initial-inputs-alist)
         (setf (alist-get (car pair) ivy-initial-inputs-alist) (cdr pair))))
     (advice-remove #'ivy-read #'ivy-prescient--enable-sort-commands)
     (advice-remove #'ivy--directory-enter #'ivy-prescient--remember-directory)
