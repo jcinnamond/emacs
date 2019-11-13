@@ -108,7 +108,7 @@
    `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-0))))
 
    ;; > Org mode
-   `(org-level-1 ((t (:foreground ,color-1))))
+   `(org-level-1 ((t (:foreground ,color-1 :underline t :height 1.2))))
    `(org-todo ((t (:foreground ,color-2 :weight bold))))
    `(org-done ((t (:foreground ,color-0 :weight normal :strike-through t))))
    `(org-block-begin-line ((t (:foreground ,color-foreground :background ,color-background))))

@@ -32,6 +32,11 @@
 (require 'jc-mode-line)
 (jc-mode-line-init)
 
+;; Better org mode appearance
+(use-package org
+  :config
+  (setq org-hide-leading-stars t)
+  (setq org-hide-emphasis-markers t))
 
 ;;----------------------------------------------------------------------
 ;; Increase the font size when sharing the screen
