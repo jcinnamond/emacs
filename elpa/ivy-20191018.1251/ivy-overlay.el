@@ -62,6 +62,8 @@ Lines are truncated to the window width."
   (when (fboundp 'company-abort)
     (company-abort)))
 
+(defvar ivy-height)
+
 (defun ivy-overlay-show-after (str)
   "Display STR in an overlay at point.
 
@@ -71,6 +73,9 @@ Then attach the overlay to the character before point."
       (progn
         (move-overlay ivy-overlay-at (1- (point)) (line-end-position))
         (overlay-put ivy-overlay-at 'invisible nil))
+    (let ((available-height (- (window-height) (count-lines (window-start) (point)) 1)))
+      (unless (>= available-height ivy-height)
+        (recenter (- (window-height) ivy-height 2))))
     (setq ivy-overlay-at (make-overlay (1- (point)) (line-end-position)))
     ;; Specify face to avoid clashing with other overlays.
     (overlay-put ivy-overlay-at 'face 'default)
@@ -79,6 +84,7 @@ Then attach the overlay to the character before point."
   (overlay-put ivy-overlay-at 'after-string ""))
 
 (declare-function org-current-level "org")
+(declare-function org-at-heading-p "org")
 (defvar org-indent-indentation-per-level)
 (defvar ivy-height)
 (defvar ivy-last)
@@ -94,7 +100,7 @@ Then attach the overlay to the character before point."
   (or
    (and (eq major-mode 'org-mode)
         (plist-get (text-properties-at (point)) 'src-block))
-   (<= (window-height) (+ ivy-height 3))
+   (<= (window-height) (+ ivy-height 2))
    (= (point) (point-min))
    (< (- (+ (window-width) (window-hscroll)) (current-column))
       30)))
@@ -130,11 +136,13 @@ Hide the minibuffer contents and cursor."
                           (+
                            (if (and (eq major-mode 'org-mode)
                                     (bound-and-true-p org-indent-mode))
-                               ;; (* org-indent-indentation-per-level (org-current-level))
-                               1
+                               (if (org-at-heading-p)
+                                   (1- (org-current-level))
+                                 (* org-indent-indentation-per-level (org-current-level)))
                              0)
                            (save-excursion
-                             (goto-char ivy-completion-beg)
+                             (when ivy-completion-beg
+                               (goto-char ivy-completion-beg))
                              (current-column)))))))))
         (let ((cursor-offset (1+ (length ivy-text))))
           (ivy-add-face-text-property cursor-offset (1+ cursor-offset)
