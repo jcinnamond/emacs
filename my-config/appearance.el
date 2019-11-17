@@ -13,6 +13,11 @@
 		    :family "Source Code Pro"
 		    :weight 'normal
 		    :width 'normal)
+
+(set-face-attribute 'variable-pitch nil
+                    :family "Source Sans Pro"
+                    :weight 'light
+                    :width 'normal)
 ;; Set the font size in OS specific config or in local config files,
 ;; depending on screen configuration.
 
@@ -35,6 +40,8 @@
 ;; Better org mode appearance
 (use-package org
   :config
+  (setq-default org-todo-keywords
+                '((sequence "TODO" "|" "DONE" "ABANDONED")))
   (setq-default org-startup-folded nil)
   (setq-default org-hide-leading-stars t)
   (setq-default org-fontify-whole-heading-line t)
