@@ -15,6 +15,8 @@
        (color-4 "#DF8615")
        (color-5 "#65b016")
 
+       (color-6 "#4e5553") ; (color-darken-name "#808a87" 20)
+
        (color-highlight-background color-3)
        (color-highlight-foreground color-foreground)
 
@@ -108,9 +110,13 @@
    `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-0))))
 
    ;; > Org mode
-   `(org-level-1 ((t (:foreground ,color-1 :underline t :height 1.2))))
-   `(org-todo ((t (:foreground ,color-2 :weight bold))))
-   `(org-done ((t (:foreground ,color-0 :weight normal :strike-through t))))
+   `(org-level-1 ((t (:foreground ,color-foreground :background ,color-6 :height 1.4))))
+   `(org-level-2 ((t (:height 1.1))))
+   `(org-level-3 ((t (:height 1.1))))
+   `(org-level-4 ((t (:height 1.1))))
+   `(org-todo ((t (:foreground ,color-2 :weight bold :height 0.8))))
+   `(org-done ((t (:foreground ,color-6 :weight normal :strike-through t :height 0.8))))
+   `(org-headline-done ((t (:inherit org-done :height 1.3))))
    `(org-block-begin-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-end-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-background ((t (:foreground ,color-foreground :background ,color-highlight-background))))
@@ -168,8 +174,8 @@
 
    ;; LSP
    `(lsp-face-highlight-textual ((t (:inherit default :foreground ,color-2))))
-   `(lsp-ui-doc-background ((t (:background ,color-menu-selection-background))))
-   `(lsp-ui-doc-header ((t (:inherit lsp-ui-doc-background :foreground ,color-2))))
+   `(lsp-ui-doc-background ((t (:background ,color-3))))
+   `(lsp-ui-doc-header ((t (:inherit lsp-ui-doc-background :foreground ,color-3))))
    `(lsp-ui-peek-peek ((t (:foreground ,color-foreground :background ,color-menu-selection-background))))
    `(lsp-ui-peek-list ((t (:background ,color-menu-selection-background))))
    `(lsp-ui-peek-filename ((t (:foreground ,color-1))))

@@ -35,8 +35,12 @@
 ;; Better org mode appearance
 (use-package org
   :config
-  (setq org-hide-leading-stars t)
-  (setq org-hide-emphasis-markers t))
+  (setq-default org-startup-folded nil)
+  (setq-default org-hide-leading-stars t)
+  (setq-default org-fontify-whole-heading-line t)
+  (setq-default org-fontify-done-headline t)
+  (setq-default org-hide-emphasis-markers t)
+  (add-hook 'org-mode-hook (lambda () (setq line-spacing 0.1) (variable-pitch-mode))))
 
 ;;----------------------------------------------------------------------
 ;; Increase the font size when sharing the screen
