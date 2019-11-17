@@ -16,11 +16,11 @@
 (use-package lsp-ui
   :ensure t
   :config
-  (setq-default lsp-ui-doc-position 'at-point)
+  (setq-default lsp-ui-doc-position 'top)
   (setq-default lsp-ui-sideline-show-hover nil)
   (setq-default lsp-ui-sideline-show-code-actions nil)
   (setq-default lsp-ui-flycheck-enable t)
-  (setq-default lsp-ui-doc-enable nil))
+  (setq-default lsp-ui-doc-enable t))
 
 (use-package company-lsp :ensure t)
 
