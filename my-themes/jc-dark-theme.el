@@ -174,8 +174,7 @@
 
    ;; LSP
    `(lsp-face-highlight-textual ((t (:inherit default :foreground ,color-2))))
-   `(lsp-ui-doc-background ((t (:background ,color-3))))
-   `(lsp-ui-doc-header ((t (:inherit lsp-ui-doc-background :foreground ,color-3))))
+   `(lsp-ui-doc-background ((t (:background ,color-menu-selection-background))))
    `(lsp-ui-peek-peek ((t (:foreground ,color-foreground :background ,color-menu-selection-background))))
    `(lsp-ui-peek-list ((t (:background ,color-menu-selection-background))))
    `(lsp-ui-peek-filename ((t (:foreground ,color-1))))

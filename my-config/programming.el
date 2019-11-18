@@ -16,7 +16,8 @@
 (use-package lsp-ui
   :ensure t
   :config
-  (setq-default lsp-ui-doc-position 'top)
+  (setq-default lsp-ui-doc-position 'bottom)
+  (setq-default lsp-ui-doc-alignment 'window)
   (setq-default lsp-ui-sideline-show-hover nil)
   (setq-default lsp-ui-sideline-show-code-actions nil)
   (setq-default lsp-ui-flycheck-enable t)
