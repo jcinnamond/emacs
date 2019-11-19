@@ -121,6 +121,10 @@
    `(org-block-end-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-background ((t (:foreground ,color-foreground :background ,color-highlight-background))))
 
+   ;; Markdown
+   `(markdown-header-face ((t (:foreground ,color-1))))
+   `(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.4))))
+
    ;; > Magit
    `(magit-hash ((t (:foreground ,color-1))))
    `(magit-section-heading ((t (:foreground ,color-foreground :weight normal))))

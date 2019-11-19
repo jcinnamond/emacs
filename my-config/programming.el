@@ -118,6 +118,9 @@
 (use-package markdown-mode
   :ensure t
   :config
+  (setq-default markdown-hide-markup t)
+  (add-hook 'markdown-mode-hook 'variable-pitch-mode)
+  (add-hook 'markdown-mode-hook 'visual-line-mode)
   (add-hook 'markdown-mode-hook 'flyspell-mode))
 
 
