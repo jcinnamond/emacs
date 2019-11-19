@@ -45,7 +45,7 @@
   :init
   (which-key-add-key-based-replacements "SPC g" "Git")
   :bind (:map space-map
-              ("g a" . 'vc-annotate)
+              ("g a" . 'magit-blame-addition)
               ("g f" . 'github-browse-file)
               ("g g" . 'github-browse-commit)
               ("g s" . 'magit-status))
