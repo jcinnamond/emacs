@@ -110,13 +110,13 @@
    `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-0))))
 
    ;; > Org mode
-   `(org-level-1 ((t (:foreground ,color-foreground :background ,color-6 :height 1.4))))
-   `(org-level-2 ((t (:height 1.1))))
-   `(org-level-3 ((t (:height 1.1))))
-   `(org-level-4 ((t (:height 1.1))))
+   `(org-level-1 ((t (:foreground ,color-1 :height 1.4))))
+   `(org-level-2 ((t (:height 1.0))))
+   `(org-level-3 ((t (:height 1.0))))
+   `(org-level-4 ((t (:height 1.0))))
    `(org-todo ((t (:foreground ,color-2 :weight bold :height 0.8))))
    `(org-done ((t (:foreground ,color-6 :weight normal :height 0.8))))
-   `(org-headline-done ((t (:inherit org-done :strike-through t :height 1.3))))
+   `(org-headline-done ((t (:inherit org-done :strike-through t :height 1.2))))
    `(org-block-begin-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-end-line ((t (:foreground ,color-foreground :background ,color-background))))
    `(org-block-background ((t (:foreground ,color-foreground :background ,color-highlight-background))))

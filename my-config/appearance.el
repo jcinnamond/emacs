@@ -15,7 +15,7 @@
 		    :width 'normal)
 
 (set-face-attribute 'variable-pitch nil
-                    :family "Source Sans Pro"
+                    :family "Helvetica Neue"
                     :weight 'light
                     :width 'normal)
 ;; Set the font size in OS specific config or in local config files,
@@ -47,7 +47,9 @@
   (setq-default org-fontify-whole-heading-line t)
   (setq-default org-fontify-done-headline t)
   (setq-default org-hide-emphasis-markers t)
-  (add-hook 'org-mode-hook (lambda () (setq line-spacing 0.1) (variable-pitch-mode))))
+  (setq-default org-cycle-separator-lines -1)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'variable-pitch-mode))
 
 ;;----------------------------------------------------------------------
 ;; Increase the font size when sharing the screen
