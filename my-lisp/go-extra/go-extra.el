@@ -68,6 +68,12 @@
 
 (defvar go-extra/package-directory nil "the directory containing the current package")
 
+(defun go-extra--package-directory ()
+  "Return or calcualte the directory for running go commands"
+  (if (bound-and-true-p go-extra/package-directory)
+      go-extra/package-directory
+    (setq-local go-extra/package-directory ".")))
+
 (defun go-extra--build-path (&optional file)
   "Return the path to a file or directory, for passing to a go command"
   (if (bound-and-true-p go-extra/package-directory)
