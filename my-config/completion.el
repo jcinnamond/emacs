@@ -15,6 +15,15 @@
 
 (use-package ivy-hydra :ensure t)
 
+(use-package ivy-posframe
+  :ensure t
+  :defines ivy-posframe-display-functions-alist
+  :after ivy
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+  (setq ivy-posframe-border-width 15)
+  (ivy-posframe-mode 1))
+
 (use-package ivy-rich
   :ensure t
   :commands ivy-rich-mode

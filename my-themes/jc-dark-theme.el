@@ -61,7 +61,7 @@
    `(font-lock-variable-name-face ((t (:foreground ,color-foreground))))
 
    ;; +--- UI ---+
-   `(minibuffer-prompt ((t (:foreground ,color-foreground, :weight normal))))
+   `(minibuffer-prompt ((t (:foreground ,color-1, :weight normal))))
 
    `(border ((t (:foreground ,color-foreground))))
    `(cursor ((t (:background ,color-foreground))))
@@ -105,9 +105,10 @@
    `(mode-line-inactive ((t (:foreground ,color-foreground :background ,color-menu-selection-background :box ,color-0))))
 
    ;; > Ivy
-   `(ivy-current-match ((t (:background ,color-menu-selection-background :foreground ,color-foreground))))
+   `(ivy-current-match ((t (:background ,color-background :foreground ,color-foreground))))
    `(ivy-minibuffer-match-face-1 ((t (:foreground ,color-0))))
    `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-0))))
+   `(ivy-posframe ((t (:background ,color-menu-selection-background))))
 
    ;; > Org mode
    `(org-level-1 ((t (:foreground ,color-1 :height 1.4))))
@@ -169,6 +170,7 @@
    `(which-key-key-face ((t (:inherit default :foreground ,color-foreground))))
    `(which-key-separator-face ((t (:inherit default :foreground ,color-foreground))))
    `(which-key-command-description-face ((t (:inherit default :foreground ,color-foreground))))
+   `(which-key-posframe ((t (:background ,color-menu-selection-background))))
 
    ;; Show paren
    `(show-paren-match ((t (:foreground ,color-2))))
