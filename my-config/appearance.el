@@ -51,6 +51,17 @@
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'variable-pitch-mode))
 
+;;------------------------------------------------------------------------------
+;; Show indents
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :defines highlight-indent-guides-method highlight-indent-guides-character highlight-indent-guides-auto-character-face-perc
+  :config
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-character 9615)
+  (setq highlight-indent-guides-auto-character-face-perc 20))
+
 ;;----------------------------------------------------------------------
 ;; Increase the font size when sharing the screen
 
