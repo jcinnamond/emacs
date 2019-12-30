@@ -47,6 +47,7 @@
   :bind (:map space-map
               ("g a" . 'magit-blame-addition)
               ("g f" . 'github-browse-file)
+              ("g l" . 'magit-log)
               ("g g" . 'github-browse-commit)
               ("g s" . 'magit-status))
   :config
