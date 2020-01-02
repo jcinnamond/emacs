@@ -51,7 +51,8 @@
   (add-hook 'go-mode-hook 'subword-mode)
   (add-hook 'go-mode-hook (lambda () (interactive)
 			    (setq tab-width 4)
-			    (setq indent-tabs-mode t)))
+			    (setq indent-tabs-mode t)
+                            (setq-default fill-column 100)))
   (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save))
 
