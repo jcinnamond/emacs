@@ -20,8 +20,8 @@
   :defines ivy-posframe-display-functions-alist
   :after ivy
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-  (setq ivy-posframe-border-width 15)
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (setq ivy-posframe-border-width 10)
   (ivy-posframe-mode 1))
 
 (use-package ivy-rich

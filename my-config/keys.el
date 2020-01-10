@@ -34,7 +34,7 @@
   :defines which-key-posframe-poshandler which-key-posframe-border-width
   :hook (which-key-mode . which-key-posframe-mode)
   :config
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-center)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-center)
   (setq which-key-posframe-border-width 10)
   (which-key-posframe-mode 1))
 

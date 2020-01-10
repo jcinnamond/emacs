@@ -22,7 +22,7 @@
 ;; depending on screen configuration.
 
 ;; Load the theme and set a key binding to switch themes
-(load-theme 'jc-dark)
+(load-theme 'jc-twilight)
 
 (define-key space-map (kbd "t") 'counsel-load-theme)
 (which-key-add-key-based-replacements "SPC t" "Theme")
@@ -32,6 +32,9 @@
 
 ;; Highlight matching parens
 (show-paren-mode 1)
+
+;; Highlight the current line
+(global-hl-line-mode 1)
 
 ;; Set up the mode line
 (require 'jc-mode-line)
