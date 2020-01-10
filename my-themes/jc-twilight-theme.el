@@ -101,6 +101,9 @@
    `(window-divider-first-pixel ((t (:background ,color-background))))
    `(window-divider-last-pixel ((t (:background ,color-background))))
 
+   ;; Auto dim other buffers
+   `(auto-dim-other-buffers-face ((t (:foreground ,color-diminshed :background ,color-subtle-background))))
+
    ;; > Flycheck & Flyspell
    `(flycheck-error ((t (:underline (:style wave :color ,color-error) :foreground ,color-error))))
    `(flycheck-warning ((t (:underline (:style wave :color ,color-warning) :foreground ,color-foreground))))

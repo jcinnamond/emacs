@@ -65,6 +65,13 @@
   (setq highlight-indent-guides-character 9615)
   (setq highlight-indent-guides-auto-character-face-perc 20))
 
+;; Dim inactive windows
+(use-package auto-dim-other-buffers
+  :ensure t
+  :config
+  (setq-default auto-dim-other-buffers-dim-on-switch-to-minibuffer nil)
+  (auto-dim-other-buffers-mode t))
+
 ;;----------------------------------------------------------------------
 ;; Increase the font size when sharing the screen
 
