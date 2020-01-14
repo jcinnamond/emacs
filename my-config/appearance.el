@@ -71,3 +71,9 @@
   :config
   (setq-default auto-dim-other-buffers-dim-on-switch-to-minibuffer nil)
   (auto-dim-other-buffers-mode t))
+
+;; Zoom all buffers together
+(defadvice text-scale-increase (around all-buffers (arg) activate)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      ad-do-it)))
