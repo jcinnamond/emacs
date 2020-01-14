@@ -71,35 +71,3 @@
   :config
   (setq-default auto-dim-other-buffers-dim-on-switch-to-minibuffer nil)
   (auto-dim-other-buffers-mode t))
-
-;;----------------------------------------------------------------------
-;; Increase the font size when sharing the screen
-
-(defvar screen-sharing--active nil)
-(defvar screen-sharing--previous-height nil)
-
-(defun screen-sharing/on ()
-  "Turns on pair mode"
-  (interactive)
-  (if (not screen-sharing--active)
-      (progn
-        (setq screen-sharing--previous-height (face-attribute 'default :height))
-        (set-face-attribute 'default nil :height (floor (* 1.3 screen-sharing--previous-height)))
-        (global-linum-mode t)
-        (setq screen-sharing--active t))))
-
-(defun screen-sharing/off ()
-  "Turns off pair mode"
-  (interactive)
-  (if (and screen-sharing--active (bound-and-true-p screen-sharing--previous-height))
-      (progn
-        (set-face-attribute 'default nil :height screen-sharing--previous-height)
-        (global-linum-mode -1)
-        (setq screen-sharing--active nil))))
-
-(defun screen-sharing/toggle ()
-  "Toggle pair mode on and off"
-  (interactive)
-  (if screen-sharing--active
-      (screen-sharing/off)
-    (screen-sharing/on)))

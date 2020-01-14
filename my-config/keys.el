@@ -106,9 +106,6 @@
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
 
-;; Make the font bigger when sharing the screen
-(define-key space-map (kbd "p") 'screen-sharing/toggle)
-
 ;; Windows
 (define-key space-map (kbd "w q") 'server-edit)
 (define-key space-map (kbd "w w") 'evil-window-next)
@@ -125,6 +122,9 @@
 (define-key space-map (kbd "w /") 'split-window-right)
 (define-key space-map (kbd "w _") 'split-window-below)
 
+;; Zoom
+(define-key space-map (kbd "z") 'text-scale-adjust)
+
 ;; Set up the prompts in which-key
 (use-package which-key
   :functions which-key-add-key-based-replacements
@@ -140,4 +140,5 @@
   (which-key-add-key-based-replacements "SPC h" "Help")
   (which-key-add-key-based-replacements "SPC i" "Insert")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
-  (which-key-add-key-based-replacements "SPC w" "Windows"))
+  (which-key-add-key-based-replacements "SPC w" "Windows")
+  (which-key-add-key-based-replacements "SPC z" "Zoom"))
