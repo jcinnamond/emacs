@@ -23,8 +23,9 @@
        (color-green "#65b016")
        (color-red "#f73a18")
 
-       (color-background color-bg2)
+       (color-background color-bg)
        (color-subtle-background color-bg1)
+       (color-inactive-background color-bg3)
        (color-foreground color-fg)
        (color-comment color-desaturate-1)
        (color-keyword color-desaturate-0)
@@ -38,7 +39,7 @@
        (color-diminshed color-desaturate-2)
        (color-subtle color-desaturate-1)
 
-       (color-menu-background color-bg)
+       (color-menu-background color-bg3)
        (color-menu-selection-background color-dark-0)
 
        (color-success color-green)
@@ -102,7 +103,7 @@
    `(window-divider-last-pixel ((t (:background ,color-background))))
 
    ;; Auto dim other buffers
-   `(auto-dim-other-buffers-face ((t (:foreground ,color-diminshed :background ,color-subtle-background))))
+   `(auto-dim-other-buffers-face ((t (:foreground ,color-diminshed :background ,color-inactive-background))))
 
    ;; > Flycheck & Flyspell
    `(flycheck-error ((t (:underline (:style wave :color ,color-error) :foreground ,color-error))))
