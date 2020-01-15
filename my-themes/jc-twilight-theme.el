@@ -4,7 +4,7 @@
 
 (deftheme jc-twilight "Dark theme inspired by https://github.com/ianpan870102/twilight-emacs-theme/blob/master/twilight-theme.el")
 
-(let* ((color-fg "#e8e8e8")
+(let* ((color-fg "#d7d7d7")
        (color-bg "#000000")
        (color-bg1 "#171717")
        (color-bg2 "#252525")
@@ -26,6 +26,7 @@
        (color-background color-bg)
        (color-subtle-background color-bg1)
        (color-inactive-background color-bg3)
+
        (color-foreground color-fg)
        (color-comment color-desaturate-1)
        (color-keyword color-desaturate-0)
