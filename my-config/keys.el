@@ -106,6 +106,9 @@
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
 
+;; Quickly jump to my todo list
+(define-key space-map (kbd "T") (lambda () (interactive) (find-file "~/todo.org")))
+
 ;; Windows
 (define-key space-map (kbd "w q") 'server-edit)
 (define-key space-map (kbd "w w") 'evil-window-next)
@@ -140,5 +143,6 @@
   (which-key-add-key-based-replacements "SPC h" "Help")
   (which-key-add-key-based-replacements "SPC i" "Insert")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
+  (which-key-add-key-based-replacements "SPC T" "TODO")
   (which-key-add-key-based-replacements "SPC w" "Windows")
   (which-key-add-key-based-replacements "SPC z" "Zoom"))
