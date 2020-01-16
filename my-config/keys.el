@@ -73,6 +73,8 @@
 (define-key space-map (kbd "c r") 'recompile)
 
 ;; Errors
+(define-key space-map (kbd "e j") 'flycheck-next-error)
+(define-key space-map (kbd "e k") 'flycheck-previous-error)
 (define-key space-map (kbd "e n") 'next-error)
 (define-key space-map (kbd "e p") 'previous-error)
 
