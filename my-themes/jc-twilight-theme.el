@@ -9,6 +9,7 @@
        (color-bg1 "#171717")
        (color-bg2 "#252525")
        (color-bg3 "#373737")
+       (color-bg4 "#484848")
 
        (base-color "#cf6a4c")
        (pop-color "#ef4a4c")
@@ -40,8 +41,8 @@
        (color-diminshed color-desaturate-2)
        (color-subtle color-desaturate-1)
 
-       (color-menu-background color-bg3)
-       (color-menu-selection-background color-dark-0)
+       (color-menu-background color-bg2)
+       (color-menu-selection-background color-bg4)
 
        (color-success color-green)
        (color-warning color-orange)
@@ -183,6 +184,8 @@
    `(company-preview ((t (:foreground ,color-standout))))
    `(company-preview-common ((t (:foreground ,color-standout))))
    `(company-preview-search ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground))))
+   `(company-tooltip-annotation ((t (:foreground ,color-diminshed))))
+   `(company-tooltip-annotation-selection ((t (:foreground ,color-diminshed))))
 
    ;; Which key
    `(which-key-key-face ((t (:inherit default :foreground ,color-foreground))))
