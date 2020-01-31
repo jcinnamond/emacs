@@ -146,3 +146,8 @@
 ;;; Editing shells
 (use-package fish-mode
   :ensure t)
+
+;;;----------------------------------------------------------------------
+;;; Editing CSV files is basically programming
+(use-package csv-mode
+  :ensure t)
