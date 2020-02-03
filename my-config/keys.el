@@ -11,7 +11,9 @@
 (use-package evil
   :ensure t
   :init
-  (evil-mode t))
+  (evil-mode t)
+  :config
+  (setq-default evil-want-Y-yank-to-eol t))
 
 ;; Helpers for wrapping the selection in parens, quotes, etc
 (use-package evil-surround
