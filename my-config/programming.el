@@ -10,6 +10,7 @@
 (use-package lsp-mode
   :ensure t
   :config
+  (setq-default lsp-enable-file-watchers nil) ;; This causes problems with large monorepos
   (setq-default lsp-prefer-flymake nil)
   (setq-default lsp-enable-links nil))
 
@@ -21,7 +22,8 @@
   (setq-default lsp-ui-sideline-show-hover nil)
   (setq-default lsp-ui-sideline-show-code-actions nil)
   (setq-default lsp-ui-flycheck-enable t)
-  (setq-default lsp-ui-doc-enable t))
+  (setq-default lsp-ui-doc-header t)
+  (setq-default lsp-ui-doc-enable nil))
 
 (use-package company-lsp :ensure t)
 
@@ -63,7 +65,7 @@
   :hook (go-mode . lsp)
   :bind (:map go-comma-map
               ("l b" . lsp-ui-peek-jump-backward)
-              ("l d" . lsp-ui-doc-show)
+              ("l d" . lsp-ui-doc-glance)
               ("l e" . lsp-ui-flycheck-list)
               ("l f" . lsp-ui-peek-find-references)
               ("l j" . lsp-ui-peek-find-definitions)

@@ -202,6 +202,7 @@
    ;; LSP
    `(lsp-face-highlight-textual ((t (:inherit default :foreground ,color-standout))))
    `(lsp-ui-doc-background ((t (:background ,color-menu-background))))
+   `(lsp-ui-doc-header ((t (:background ,color-highlight-background :foreground ,color-highlight-foreground))))
    `(lsp-ui-peek-peek ((t (:foreground ,color-foreground :background ,color-menu-background))))
    `(lsp-ui-peek-list ((t (:background ,color-menu-background))))
    `(lsp-ui-peek-filename ((t (:foreground ,color-subtle))))
