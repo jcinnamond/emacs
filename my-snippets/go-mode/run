@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: t.Run
-# key: t.Run
+# key: run
 # --
-t.Run("$1", func(t *testing.T) {
+t.Run($1, func(t *testing.T) {
     $0
 })
