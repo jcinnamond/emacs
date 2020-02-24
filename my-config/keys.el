@@ -129,6 +129,7 @@
 (define-key space-map (kbd "w N") 'make-frame-command)
 (define-key space-map (kbd "w o b") 'scroll-other-window-down)
 (define-key space-map (kbd "w o f") 'scroll-other-window)
+(define-key space-map (kbd "w v") 'delete-other-windows-vertically)
 (define-key space-map (kbd "w /") 'split-window-right)
 (define-key space-map (kbd "w _") 'split-window-below)
 
