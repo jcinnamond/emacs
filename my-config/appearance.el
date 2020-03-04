@@ -72,8 +72,36 @@
   (setq-default auto-dim-other-buffers-dim-on-switch-to-minibuffer nil)
   (auto-dim-other-buffers-mode t))
 
-;; Zoom all buffers together
-(defadvice text-scale-increase (around all-buffers (arg) activate)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      ad-do-it)))
+;;------------------------------------------------------------------------------
+;; Functions for zooming in/out
+(defvar jc--zoom-original-size nil "stores the height of the default face before zooming in")
+
+(defun jc/zoom-in ()
+  "Increase the default font size, useful for screen sharing & pair programming"
+  (interactive)
+  (let ((current-height (face-attribute 'default :height)))
+    (jc--ensure-original-zoom-stored current-height)
+    (jc--zoom-to (* current-height 1.4))))
+
+(defun jc/zoom-out ()
+  "Decrease the default font size"
+  (interactive)
+  (let ((current-height (face-attribute 'default :height)))
+    (jc--ensure-original-zoom-stored current-height)
+    (jc--zoom-to (/ current-height 1.4))))
+
+(defun jc/zoom-reset ()
+  "Reset the original default font size"
+  (interactive)
+  (if jc--zoom-original-size
+      (jc--zoom-to jc--zoom-original-size)))
+
+(defun jc--ensure-original-zoom-stored (height)
+  "Store 'height' as the original face size unless it has previously been set. This can be used to restore the original size after zooming."
+  (if (not jc--zoom-original-size)
+      (setq jc--zoom-original-size (face-attribute 'default :height))))
+
+(defun jc--zoom-to (height)
+  "Helper for setting the default face height and resizing the frame"
+  (set-face-attribute 'default nil :height (floor height))
+  (set-frame-parameter nil 'fullscreen 'maximized))

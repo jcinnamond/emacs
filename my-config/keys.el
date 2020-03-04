@@ -134,7 +134,9 @@
 (define-key space-map (kbd "w _") 'split-window-below)
 
 ;; Zoom
-(define-key space-map (kbd "z") 'text-scale-adjust)
+(define-key space-map (kbd "z j") 'jc/zoom-in)
+(define-key space-map (kbd "z k") 'jc/zoom-out)
+(define-key space-map (kbd "z z") 'jc/zoom-reset)
 
 ;; Set up the prompts in which-key
 (use-package which-key
