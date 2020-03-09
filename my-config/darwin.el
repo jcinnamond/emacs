@@ -1,5 +1,6 @@
 (set-face-attribute 'default nil :height 130)
 (set-face-attribute 'variable-pitch nil :height 1.2)
+(set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin" (concat ":" (getenv "HOME") "/bin")))
 (setq exec-path (append exec-path `("/usr/local/bin" ,(concat (getenv "HOME") "/bin"))))
