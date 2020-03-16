@@ -13,6 +13,10 @@
   `(let ((default-directory (my-config/project-root-directory)))
      ,body))
 
+(defun my-config/copy-filename-in-project ()
+  "Copy the name of the current file, relative to the project root if set or to the filesystem root."
+  (interactive)
+  (kill-new (file-relative-name (buffer-file-name) (my-config/project-root-directory))))
 
 ;;;----------------------------------------------------------------------
 ;;; Find file in project

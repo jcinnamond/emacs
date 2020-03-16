@@ -89,6 +89,7 @@
 (define-key space-map (kbd "f R") 'rename-current-buffer-file)
 (define-key space-map (kbd "f o") 'find-file-other-window)
 (define-key space-map (kbd "f t") (lambda () (interactive) (set-buffer-modified-p t) (save-buffer)))
+(define-key space-map (kbd "f y") 'my-config/copy-filename-in-project)
 
 ;; File variables
 (define-key space-map (kbd "f v d") 'add-dir-local-variable)
