@@ -71,7 +71,8 @@
               ("l j" . lsp-ui-peek-find-definitions)
               ("l q" . lsp-ui-doc-hide)
               ("l r" . lsp-rename)
-              ("l R" . lsp-workspace-restart)))
+              ("l R" . lsp-workspace-restart)
+              ("l t" . lsp-find-type-definition)))
 
 ;;;----------------------------------------------------------------------
 ;;; Editing protobuf files
