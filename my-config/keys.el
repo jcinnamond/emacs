@@ -97,6 +97,7 @@
 
 ;; Help
 (define-key space-map (kbd "h f") 'describe-function)
+(define-key space-map (kbd "h F") 'describe-face)
 (define-key space-map (kbd "h j") 'find-function)
 (define-key space-map (kbd "h k") 'describe-key)
 (define-key space-map (kbd "h m") 'describe-mode)
