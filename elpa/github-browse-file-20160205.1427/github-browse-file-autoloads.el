@@ -31,9 +31,7 @@ region.
 \(fn &optional FORCE-MASTER)" t nil)
 
 (autoload 'github-browse-commit "github-browse-file" "\
-Show the GitHub page for the current commit.
-
-\(fn)" t nil)
+Show the GitHub page for the current commit." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "github-browse-file" '("github-browse-")))
 

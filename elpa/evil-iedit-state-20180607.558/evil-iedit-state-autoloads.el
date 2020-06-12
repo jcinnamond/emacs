@@ -12,7 +12,7 @@
 
 (eval-after-load 'expand-region '(progn (defun evil-iedit-state/iedit-mode-from-expand-region (&optional arg) "Start `iedit-mode'." (interactive "P") (evil-iedit-state/iedit-mode arg) (setq overriding-terminal-local-map nil)) (defadvice er/prepare-for-more-expansions-internal (around iedit/prepare-for-more-expansions-internal activate) ad-do-it (let ((default-msg (car ad-return-value)) (default-bindings (cdr ad-return-value))) (setq ad-return-value (cons (concat default-msg ", e to edit") (add-to-list 'default-bindings '("e" evil-iedit-state/iedit-mode-from-expand-region))))))))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "evil-iedit-state" '("iedit-done" "evil-iedit-state")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "evil-iedit-state" '("evil-iedit-state" "iedit-done")))
 
 ;;;***
 

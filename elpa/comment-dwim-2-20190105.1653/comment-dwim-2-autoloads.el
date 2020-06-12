@@ -27,7 +27,7 @@ You can also switch behaviors of (1) and (2) by setting
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "comment-dwim-2" '("comment-dwim-2--inline-comment-behavior" "cd2/")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "comment-dwim-2" '("cd2/" "comment-dwim-2--inline-comment-behavior")))
 
 ;;;***
 

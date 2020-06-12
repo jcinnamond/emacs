@@ -11,9 +11,7 @@
 ;;; Generated autoloads from which-key-posframe.el
 
 (autoload 'which-key-posframe-enable "which-key-posframe" "\
-Enable which-key-posframe.
-
-\(fn)" t nil)
+Enable which-key-posframe." t nil)
 
 (defvar which-key-posframe-mode nil "\
 Non-nil if Which-Key-Posframe mode is enabled.
@@ -27,6 +25,11 @@ or call the function `which-key-posframe-mode'.")
 
 (autoload 'which-key-posframe-mode "which-key-posframe" "\
 Toggle which key posframe mode on of off.
+
+If called interactively, enable Which-Key-Posframe mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
