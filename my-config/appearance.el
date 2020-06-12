@@ -10,12 +10,10 @@
 
 ;; Set the default font
 (set-face-attribute 'default nil
-		    :family "Source Code Pro"
 		    :weight 'normal
 		    :width 'normal)
 
 (set-face-attribute 'variable-pitch nil
-                    :family "Helvetica Neue"
                     :weight 'light
                     :width 'normal)
 ;; Set the font size in OS specific config or in local config files,
