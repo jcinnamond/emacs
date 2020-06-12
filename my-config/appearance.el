@@ -103,3 +103,9 @@
   "Helper for setting the default face height and resizing the frame"
   (set-face-attribute 'default nil :height (floor height))
   (set-frame-parameter nil 'fullscreen 'maximized))
+
+;;------------------------------------------------------------------------------
+;; Ligature support when using firacode
+(use-package fira-code-mode
+  :ensure t
+  :hook prog-mode)
