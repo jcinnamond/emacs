@@ -20,7 +20,7 @@
 ;; depending on screen configuration.
 
 ;; Load the theme and set a key binding to switch themes
-(load-theme 'jc-twilight)
+(load-theme 'jc-terminal)
 
 (define-key space-map (kbd "t") 'counsel-load-theme)
 (which-key-add-key-based-replacements "SPC t" "Theme")
