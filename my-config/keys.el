@@ -112,7 +112,9 @@
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
 
-;; Quickly jump to my todo list
+;; Quickly jump to todo/journal/notes
+(define-key space-map (kbd "J") (lambda () (interactive) (find-file "~/journal.org")))
+(define-key space-map (kbd "N") (lambda () (interactive) (find-file "~/notes.org")))
 (define-key space-map (kbd "T") (lambda () (interactive) (find-file "~/todo.org")))
 
 ;; Undo tree
@@ -154,7 +156,9 @@
   (which-key-add-key-based-replacements "SPC f v" "File variables")
   (which-key-add-key-based-replacements "SPC h" "Help")
   (which-key-add-key-based-replacements "SPC i" "Insert")
+  (which-key-add-key-based-replacements "SPC T" "Jump to journal")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
+  (which-key-add-key-based-replacements "SPC N" "Jump to notes")
   (which-key-add-key-based-replacements "SPC T" "TODO")
   (which-key-add-key-based-replacements "SPC u" "Undo tree")
   (which-key-add-key-based-replacements "SPC w" "Windows")
