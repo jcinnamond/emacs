@@ -154,3 +154,9 @@
 ;;; Editing CSV files is basically programming
 (use-package csv-mode
   :ensure t)
+
+;;;------------------------------------------------------------------------------
+;;; Haskell
+;;; Very basic setup, really just for editing xmonad config
+(use-package haskell-mode
+  :ensure t)
