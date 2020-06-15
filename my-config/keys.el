@@ -113,7 +113,7 @@
 (define-key space-map (kbd "n w") 'widen)
 
 ;; Quickly jump to todo/journal/notes
-(define-key space-map (kbd "J") (lambda () (interactive) (find-file "~/journal.org")))
+(define-key space-map (kbd "J") 'org-journal-new-entry)
 (define-key space-map (kbd "N") (lambda () (interactive) (find-file "~/notes.org")))
 (define-key space-map (kbd "T") (lambda () (interactive) (find-file "~/todo.org")))
 
