@@ -159,4 +159,11 @@
 ;;; Haskell
 ;;; Very basic setup, really just for editing xmonad config
 (use-package haskell-mode
-  :ensure t)
+  :ensure t
+
+  :init
+  (define-prefix-command 'haskell-comma-map)
+  (evil-define-key '(normal visual motion emacs) haskell-mode-map (kbd ",") 'haskell-comma-map)
+
+  :bind (:map haskell-comma-map
+              ("c" . compile)))
