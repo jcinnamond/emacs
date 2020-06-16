@@ -31,7 +31,7 @@
 
        (color-foreground color-white2)
 
-       (color-comment color-yellow1)
+       (color-comment color-white1)
        (color-keyword color-cyan1)
        (color-constant color-cyan1)
 
