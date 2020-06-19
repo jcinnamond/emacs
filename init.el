@@ -68,6 +68,9 @@
 ;; Config for working with projects
 (load "projects")
 
+;; Configure org mode
+(load "notes")
+
 
 ;;;----------------------------------------------------------------------
 ;;; OS specific configuration

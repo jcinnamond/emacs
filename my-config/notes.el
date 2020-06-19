@@ -4,7 +4,7 @@
 (use-package org
   :config
   (setq-default org-todo-keywords
-                '((sequence "TODO" "|" "DONE" "ABANDONED")))
+                '((sequence "MAYBE" "TODO" "|" "DONE" "ABANDONED")))
   (setq-default org-startup-folded nil)
   (setq-default org-hide-leading-stars t)
   (setq-default org-fontify-whole-heading-line t)
@@ -19,5 +19,5 @@
   :ensure t
   :config
   (setq org-journal-dir "~/journal/")
-  (setq org-journal-file-type "daily")
+  (setq org-journal-file-type "weekly")
   (setq org-journal-find-file 'find-file))

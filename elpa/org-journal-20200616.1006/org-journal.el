@@ -4,8 +4,8 @@
 ;;         Christian Schwarzgruber
 
 ;; URL: http://github.com/bastibe/org-journal
-;; Package-Version: 20200613.1134
-;; Package-Commit: 0d6d81234a20ac800d24373b89159ee33a69f6c3
+;; Package-Version: 20200616.1006
+;; Package-Commit: 6671693a6f70cf9ce23471785e3c73b9489762bb
 ;; Version: 2.1.0
 ;; Package-Requires: ((emacs "25.1") (org "9.1"))
 
@@ -786,13 +786,26 @@ If the parent heading has no more content delete it is well."
 
     (unless (eq (current-column) 0) (insert "\n"))
 
-    (insert (replace-regexp-in-string
-             org-ts-regexp
-             (format-time-string "<%Y-%m-%d %a>" (org-journal-calendar-date->time
-                                                  (if (org-journal-daily-p)
-                                                      (org-journal-file-name->calendar-date (buffer-file-name))
-                                                    (org-journal-entry-date->calendar-date))))
-             text))
+    (insert text)
+
+    (while (org-up-heading-safe))
+
+    (save-excursion
+      (while (re-search-forward org-ts-regexp nil t)
+        (unless (save-excursion
+                  (goto-char (point-at-bol))
+                  (re-search-forward "\\<\\(SCHEDULED\\|DEADLINE\\):" (point-at-eol) t))
+          (replace-match
+           (format-time-string "<%Y-%m-%d %a>"
+                               (org-journal-calendar-date->time
+                                (if (org-journal-daily-p)
+                                    (org-journal-file-name->calendar-date (buffer-file-name))
+                                  (save-match-data
+                                    (save-excursion
+                                      (while (org-up-heading-safe))
+                                      (org-journal-entry-date->calendar-date))))))))))
+
+    (outline-end-of-subtree)
 
     ;; Delete carried over items
     (with-current-buffer prev-buffer
@@ -801,10 +814,7 @@ If the parent heading has no more content delete it is well."
                         (goto-char (1- (cadr x)))
                         (org-goto-first-child))
                 (kill-region (car x) (cadr x))))
-            (reverse entries)))
-
-    (while (org-up-heading-safe))
-    (outline-end-of-subtree)))
+            (reverse entries)))))
 
 (defun org-journal-carryover ()
   "Moves all items matching `org-journal-carryover-items' from the
