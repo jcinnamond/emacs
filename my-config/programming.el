@@ -74,6 +74,9 @@
               ("l R" . lsp-workspace-restart)
               ("l t" . lsp-find-type-definition)))
 
+;; When running go tests, use an existing buffer in another frame for output if available
+(add-to-list 'display-buffer-alist '(("\* Go Test \*" nil (reusable-frames . t))))
+
 ;;;----------------------------------------------------------------------
 ;;; Editing protobuf files
 
