@@ -159,6 +159,11 @@
   :ensure t)
 
 ;;;------------------------------------------------------------------------------
+;;; Same for editing yaml
+(use-package yaml-mode
+  :ensure t)
+
+;;;------------------------------------------------------------------------------
 ;;; Haskell
 ;;; Very basic setup, really just for editing xmonad config
 (use-package haskell-mode
