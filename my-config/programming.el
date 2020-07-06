@@ -14,6 +14,11 @@
   (setq-default lsp-prefer-flymake nil)
   (setq-default lsp-enable-links nil))
 
+;; Set some defaults for better lsp performance
+;; (see https://emacs-lsp.github.io/lsp-mode/page/performance/)
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 (use-package lsp-ui
   :ensure t
   :config
@@ -24,8 +29,6 @@
   (setq-default lsp-ui-flycheck-enable t)
   (setq-default lsp-ui-doc-header t)
   (setq-default lsp-ui-doc-enable nil))
-
-(use-package company-lsp :ensure t)
 
 
 ;;;----------------------------------------------------------------------
