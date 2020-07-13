@@ -78,7 +78,7 @@
   "Return the path to a file or directory, for passing to a go command"
   (if (bound-and-true-p go-extra/package-directory)
       (format "%s/%s" (go-extra--package-directory) (or file "..."))
-    "."))
+    "./..."))
 
 (defun go-extra--run-command (command name &optional path)
   "Build and run a command"
@@ -100,19 +100,19 @@
   "Test the current directory"
   (interactive)
   (setq go-extra--last-test-command nil)
-  (go-extra--run-command "go test" go-extra/test-buffer-name))
+  (go-extra--run-command "go test -v" go-extra/test-buffer-name))
 
 (defun go-extra/test-single (&optional command)
   "Run the current test"
   (interactive)
-  (setq go-extra--last-test-command (or command (format "go test -run %s" (go--function-name t))))
+  (setq go-extra--last-test-command (or command (format "go test -run %s\\$" (go--function-name t))))
   (jc-compile/compile go-extra--last-test-command go-extra/test-buffer-name))
 
 (defun go-extra/rerun-test ()
   "Rerun the previous test"
   (interactive)
   (if go-extra--last-test-command
-      (go-extra/test-single go-extra--last-test-command)
+      (my-config/run-in-root (go-extra/test-single go-extra--last-test-command))
     (go-extra/test)))
 
 (provide 'go-extra)
