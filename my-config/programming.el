@@ -86,6 +86,7 @@
 
 ;; When running go tests, use an existing buffer in another frame for output if available
 (add-to-list 'display-buffer-alist '("\* Go Test \*" nil (reusable-frames . t)))
+(add-to-list 'display-buffer-alist '("\*compilation\*" nil (reusable-frames . t)))
 
 ;;;----------------------------------------------------------------------
 ;;; Editing protobuf files
