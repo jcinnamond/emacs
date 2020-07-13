@@ -12,7 +12,11 @@
   :config
   (setq-default lsp-enable-file-watchers nil) ;; This causes problems with large monorepos
   (setq-default lsp-prefer-flymake nil)
-  (setq-default lsp-enable-links nil))
+  (setq-default lsp-enable-links nil)
+
+  ;; reduce delay when showing company completions if LSP is running
+  (setq-local company-minimum-prefix-length 2
+              company-idle-delay 0.2))
 
 ;; Set some defaults for better lsp performance
 ;; (see https://emacs-lsp.github.io/lsp-mode/page/performance/)
@@ -25,7 +29,8 @@
   (setq-default lsp-ui-doc-position 'bottom)
   (setq-default lsp-ui-doc-alignment 'window)
   (setq-default lsp-ui-sideline-show-hover nil)
-  (setq-default lsp-ui-sideline-show-code-actions nil)
+  (setq-default lsp-ui-sideline-show-code-actions t)
+  (setq-default lsp-ui-sideline-show-code-diagnostics t)
   (setq-default lsp-ui-flycheck-enable t)
   (setq-default lsp-ui-doc-header t)
   (setq-default lsp-ui-doc-enable nil))
@@ -67,11 +72,13 @@
 (use-package lsp-mode
   :hook (go-mode . lsp)
   :bind (:map go-comma-map
+              ("l a" . lsp-execute-code-action)
               ("l b" . lsp-ui-peek-jump-backward)
               ("l d" . lsp-ui-doc-glance)
               ("l e" . lsp-ui-flycheck-list)
               ("l f" . lsp-ui-peek-find-references)
               ("l j" . lsp-ui-peek-find-definitions)
+              ("l J" . lsp-ui-peek-find-implementation)
               ("l q" . lsp-ui-doc-hide)
               ("l r" . lsp-rename)
               ("l R" . lsp-workspace-restart)
