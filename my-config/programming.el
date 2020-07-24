@@ -16,7 +16,7 @@
 
   ;; reduce delay when showing company completions if LSP is running
   (setq-local company-minimum-prefix-length 2
-              company-idle-delay 0.2))
+              company-idle-delay 0))
 
 ;; Set some defaults for better lsp performance
 ;; (see https://emacs-lsp.github.io/lsp-mode/page/performance/)
