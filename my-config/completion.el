@@ -30,7 +30,15 @@
   :functions ivy-format-function ivy-format-function-line
   :init
   (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line))
+  (setq ivy-format-function #'ivy-format-function-line)
+  :config
+  (setq ivy-rich-display-transformers-list
+        (plist-put ivy-rich-display-transformers-list 'ivy-switch-buffer
+                   '(:columns
+                     ((ivy-rich-switch-buffer-project (:width 15 :face font-lock-constant-face))
+                      (ivy-switch-buffer-transformer (:width 50))
+                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+                      (ivy-rich-switch-buffer-major-mode (:width 12 :face font-lock-comment-face)))))))
 
 (use-package counsel
   :ensure t
