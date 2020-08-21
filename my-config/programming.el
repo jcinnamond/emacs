@@ -4,6 +4,7 @@
 
 (use-package flycheck :ensure t)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
 
 ;;;----------------------------------------------------------------------
 ;;; Use LSP for better ide-like functions
