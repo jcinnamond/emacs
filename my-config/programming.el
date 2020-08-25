@@ -151,10 +151,6 @@
   :config
   (setq-default js-indent-level 2))
 
-(use-package prettier-js
-  :ensure t
-  :hook js-mode)
-
 
 ;;;----------------------------------------------------------------------
 ;;; Editing Graphql
