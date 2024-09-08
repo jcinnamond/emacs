@@ -182,6 +182,7 @@
 ;; Projects
 (keymap-set space-map "p d" 'project-dired)
 (keymap-set space-map "p f" 'project-find-file)
+(keymap-set space-map "p m" 'magit-project-status)
 (keymap-set space-map "p p" 'project-switch-project)
 (keymap-set space-map "p s" 'project-eshell)
 
