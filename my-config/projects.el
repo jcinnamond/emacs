@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; Config for working with projects. This sets up bindings to open
 ;;; files and also configures `magit`.
 
@@ -42,9 +44,7 @@
 
 ;;;----------------------------------------------------------------------
 ;;; Git
-(setq evil-magit-state 'normal)
-
-(use-package evil-magit
+(use-package magit
   :ensure t
   :init
   (which-key-add-key-based-replacements "SPC g" "Git")
@@ -56,14 +56,10 @@
               ("g s" . 'magit-status))
   :config
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
-  (add-hook 'magit-mode-hook (lambda () (interactive) (turn-off-evil-mc-mode)))
-
-  (use-package git-commit
-    :config
-    (define-prefix-command 'git-commit-comma-map)
-    (evil-define-key '(normal visual motion emacs) git-commit-mode-map (kbd ",") 'git-commit-comma-map)
-    (define-key 'git-commit-comma-map (kbd "c") 'with-editor-finish)
-    (define-key 'git-commit-comma-map (kbd "k") 'with-editor-cancel)
-    (add-hook 'git-commit-mode-hook 'flyspell-mode)))
+  (define-prefix-command 'git-commit-comma-map)
+  ;; (evil-define-key '(normal visual motion emacs) git-commit-mode-map (kbd ",") 'git-commit-comma-map)
+  (define-key 'git-commit-comma-map (kbd "c") 'with-editor-finish)
+  (define-key 'git-commit-comma-map (kbd "k") 'with-editor-cancel)
+  (add-hook 'git-commit-mode-hook 'flyspell-mode))
 
 (use-package github-browse-file :ensure t)

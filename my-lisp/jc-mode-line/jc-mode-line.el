@@ -88,7 +88,7 @@
       (:propertize "  %l/" face jc-mode-line-position-face)
       (:eval (propertize (jc-mode-line-line-count) 'face 'jc-mode-line-position-face))
       (:propertize "  |  " face jc-mode-line-space-face)
-      (:propertize "(%m) " face jc-mode-line-mode-face)
+      mode-name
       )))
 
 (provide 'jc-mode-line)

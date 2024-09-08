@@ -1,0 +1,2 @@
+;; Generated package description from haskell-ts-mode.el  -*- no-byte-compile: t -*-
+(define-package "haskell-ts-mode" "1" "A treesit based major mode for haskell" '((emacs "29.3")) :commit "58d158bef475536e78e2a145f2029c49924fb19a" :authors '(("Pranshu Sharma" . "pranshusharma366atgmail")) :maintainer '("Pranshu Sharma" . "pranshusharma366atgmail") :keywords '("languages" "haskell") :url "https://codeberg.org/pranshu/haskell-ts-mode")

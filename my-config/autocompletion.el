@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (use-package company
   :ensure t
   :defer t
@@ -21,12 +23,10 @@
   (setq yas-snippet-dirs '("~/.emacs.d/my-snippets"))
   (yas-global-mode 1)
   :config
-  (evil-define-key 'insert 'yas-minor-mode-map (kbd "TAB") yas-maybe-expand)
-  (evil-define-key '(normal visual motion emacs) 'global (kbd "TAB") yas-maybe-expand)
+  ;; (evil-define-key 'insert 'yas-minor-mode-map (kbd "TAB") yas-maybe-expand)
+  ;; (evil-define-key '(normal visual motion emacs) 'global (kbd "TAB") yas-maybe-expand)
 
-  (define-prefix-command 'snippet-comma-map)
-  (evil-define-key '(normal visual motion emacs) snippet-mode-map (kbd ",") 'snippet-comma-map)
-  (define-key 'snippet-comma-map (kbd "l") 'yas-load-snippet-buffer))
-
-(use-package yasnippet-snippets
-  :ensure t)
+  ;; (define-prefix-command 'snippet-comma-map)
+  ;; (evil-define-key '(normal visual motion emacs) snippet-mode-map (kbd ",") 'snippet-comma-map)
+  ;; (define-key 'snippet-comma-map (kbd "l") 'yas-load-snippet-buffer)
+  )

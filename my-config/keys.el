@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; This config is responsible for two main functions. First, it
 ;;; setups up evil mode to give me vi-style keybindings. Next, it
 ;;; creates a global keymap based on the <space> leader key (an idea
@@ -7,20 +9,83 @@
 ;;;----------------------------------------------------------------------
 ;;; Set up vi-style keybindings
 
-;; Use evil mode for vi like keybindings
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode t)
-  :config
-  (setq-default evil-want-Y-yank-to-eol t))
+(defun meow-setup ()
+  (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
+  (meow-motion-overwrite-define-key
+   ;; Use e to move up, n to move down.
+   ;; Since special modes usually use n to move down, we only overwrite e here.
+   '("e" . meow-prev)
+   '("<escape>" . ignore)
+   '("<SPC>" . space-map))
+  (meow-normal-define-key
+   '("0" . meow-expand-0)
+   '("1" . meow-expand-1)
+   '("2" . meow-expand-2)
+   '("3" . meow-expand-3)
+   '("4" . meow-expand-4)
+   '("5" . meow-expand-5)
+   '("6" . meow-expand-6)
+   '("7" . meow-expand-7)
+   '("8" . meow-expand-8)
+   '("9" . meow-expand-9)
+   '("-" . negative-argument)
+   '(";" . meow-reverse)
+   '("," . meow-inner-of-thing)
+   '("." . meow-bounds-of-thing)
+   '("[" . meow-beginning-of-thing)
+   '("]" . meow-end-of-thing)
+   '("/" . isearch-forward)
+   '("a" . meow-append)
+   '("A" . meow-open-below)
+   '("b" . meow-back-word)
+   '("B" . meow-back-symbol)
+   '("c" . meow-change)
+   '("d" . kill-region)
+   '("e" . meow-prev)
+   '("E" . meow-prev-expand)
+   '("f" . meow-find)
+   '("g" . meow-cancel-selection)
+   '("G" . meow-grab)
+   '("h" . meow-left)
+   '("H" . meow-left-expand)
+   '("i" . meow-right)
+   '("I" . meow-right-expand)
+   '("j" . meow-join)
+   '("k" . meow-kill)
+   '("l" . meow-line)
+   '("L" . meow-goto-line)
+   '("m" . meow-mark-word)
+   '("M" . meow-mark-symbol)
+   '("n" . meow-next)
+   '("N" . meow-next-expand)
+   '("o" . meow-block)
+   '("O" . meow-to-block)
+   '("p" . yank)
+   '("P" . meow-yank)
+   '("q" . meow-quit)
+   '("r" . meow-replace)
+   '("s" . meow-insert)
+   '("S" . meow-open-above)
+   '("t" . meow-till)
+   '("u" . meow-undo)
+   '("U" . meow-undo-in-selection)
+   '("v" . meow-search)
+   '("w" . meow-next-word)
+   '("W" . meow-next-symbol)
+   '("x" . meow-delete)
+   '("X" . meow-backward-delete)
+   '("y" . kill-ring-save)
+   '("z" . meow-pop-selection)
+   '(":" . execute-extended-command)
+   '("'" . repeat)
+   '("<escape>" . ignore)))
 
-;; Helpers for wrapping the selection in parens, quotes, etc
-(use-package evil-surround
+(use-package meow
   :ensure t
-  :commands global-evil-surround-mode
+  :config
+  (meow-setup)
   :init
-  (global-evil-surround-mode t))
+  (meow-global-mode t))
 
 
 ;;;----------------------------------------------------------------------
@@ -46,8 +111,8 @@
 ;;; of the configuration might add to this keymap as they define extra
 ;;; functionality.
 (define-prefix-command 'space-map)
-(evil-define-key '(normal visual motion emacs) 'global (kbd "SPC") 'space-map)
-(evil-define-key '(normal visual motion emacs) 'magit-mode-map (kbd "SPC") 'space-map)
+(keymap-unset meow-normal-state-keymap "<SPC>")
+(keymap-set meow-normal-state-keymap "<SPC>" 'space-map)
 
 ;; Emacs
 (define-key space-map (kbd "SPC") 'execute-extended-command)
@@ -56,10 +121,12 @@
 ;; Buffers
 (define-key space-map (kbd "TAB") (lambda () (interactive) (switch-to-buffer (other-buffer))))
 (define-key space-map (kbd "b b") 'switch-to-buffer)
-(define-key space-map (kbd "b d") 'evil-delete-buffer)
+(define-key space-map (kbd "b d") 'kill-current-buffer)
 (define-key space-map (kbd "b k") 'kill-buffer)
 (define-key space-map (kbd "b j") 'ibuffer)
 (define-key space-map (kbd "b o") 'switch-to-buffer-other-window)
+
+(keymap-global-set "C-<tab>" 'switch-to-buffer)
 
 (defun peek-buffer (buffer-or-name)
   "Open buffer in another window without focusing"
@@ -112,6 +179,12 @@
 (define-key space-map (kbd "n r") 'narrow-to-region)
 (define-key space-map (kbd "n w") 'widen)
 
+;; Projects
+(keymap-set space-map "p d" 'project-dired)
+(keymap-set space-map "p f" 'project-find-file)
+(keymap-set space-map "p p" 'project-switch-project)
+(keymap-set space-map "p s" 'project-eshell)
+
 ;; Quickly jump to todo/journal/notes
 (define-key space-map (kbd "J") 'org-journal-new-entry)
 (define-key space-map (kbd "N") (lambda () (interactive) (find-file "~/notes.org")))
@@ -122,11 +195,7 @@
 
 ;; Windows
 (define-key space-map (kbd "w q") 'server-edit)
-(define-key space-map (kbd "w w") 'evil-window-next)
-(define-key space-map (kbd "w h") 'evil-window-left)
-(define-key space-map (kbd "w j") 'evil-window-down)
-(define-key space-map (kbd "w k") 'evil-window-up)
-(define-key space-map (kbd "w l") 'evil-window-right)
+(define-key space-map (kbd "w w") 'other-window)
 (define-key space-map (kbd "w d") 'delete-window)
 (define-key space-map (kbd "w D") 'delete-frame)
 (define-key space-map (kbd "w m") 'delete-other-windows)
@@ -158,8 +227,22 @@
   (which-key-add-key-based-replacements "SPC i" "Insert")
   (which-key-add-key-based-replacements "SPC T" "Jump to journal")
   (which-key-add-key-based-replacements "SPC n" "Narrowing")
+  (which-key-add-key-based-replacements "SPC p" "Projects")
   (which-key-add-key-based-replacements "SPC N" "Jump to notes")
   (which-key-add-key-based-replacements "SPC T" "TODO")
   (which-key-add-key-based-replacements "SPC u" "Undo tree")
   (which-key-add-key-based-replacements "SPC w" "Windows")
   (which-key-add-key-based-replacements "SPC z" "Zoom"))
+
+;;;----------------------------------------------------------------------
+;;; Set a mode specific leader map, for commands such as compile or eval
+(define-prefix-command 'comma-map)
+(keymap-unset meow-normal-state-keymap ",")
+
+;;;----------------------------------------------------------------------
+;;; Set up some global keys
+(keymap-global-set "C-'" 'eshell)
+(keymap-global-unset "C-s")
+(keymap-global-set "C-s" 'save-buffer)
+(keymap-global-unset "C-w")
+(keymap-global-set "C-w" 'kill-current-buffer)

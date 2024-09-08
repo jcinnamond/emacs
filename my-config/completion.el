@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; This config installs ivy/swiper/counsel to provide an interactive
 ;;; completion interface. Most obviously, this replaces completing
 ;;; read functions from the minibuffer.
@@ -24,21 +26,21 @@
   (setq ivy-posframe-border-width 3)
   (ivy-posframe-mode 1))
 
-(use-package ivy-rich
-  :ensure t
-  :commands ivy-rich-mode
-  :functions ivy-format-function ivy-format-function-line
-  :init
-  (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line)
-  :config
-  (setq ivy-rich-display-transformers-list
-        (plist-put ivy-rich-display-transformers-list 'ivy-switch-buffer
-                   '(:columns
-                     ((ivy-rich-switch-buffer-project (:width 15 :face font-lock-constant-face))
-                      (ivy-switch-buffer-transformer (:width 50))
-                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
-                      (ivy-rich-switch-buffer-major-mode (:width 12 :face font-lock-comment-face)))))))
+;; (use-package ivy-rich
+;;   :ensure t
+;;   :commands ivy-rich-mode
+;;   :functions ivy-format-function ivy-format-function-line
+;;   :init
+;;   (ivy-rich-mode 1)
+;;   (setq ivy-format-function #'ivy-format-function-line)
+;;   :config
+;;   (setq ivy-rich-display-transformers-list
+;;         (plist-put ivy-rich-display-transformers-list 'ivy-switch-buffer
+;;                    '(:columns
+;;                      ((ivy-rich-switch-buffer-project (:width 15 :face font-lock-constant-face))
+;;                       (ivy-switch-buffer-transformer (:width 50))
+;;                       (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+;;                       (ivy-rich-switch-buffer-major-mode (:width 12 :face font-lock-comment-face)))))))
 
 (use-package counsel
   :ensure t

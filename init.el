@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; My emacs config.
 ;;;
 ;;; This file is responsible for setting up the the load path and then loading

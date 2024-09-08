@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; Various helpers for selecting regions, or manipulating selections.
 
 ;;;----------------------------------------------------------------------
@@ -14,25 +16,25 @@
   (end-of-line)
   (set-mark (line-beginning-position)))
 
-(use-package evil
-  :bind (:map evil-visual-state-map
-	      ("a l" . 'jc-select-current-line)))
+;; (use-package evil
+;;   :bind (:map evil-visual-state-map
+;; 	      ("a l" . 'jc-select-current-line)))
 
 
 ;;;----------------------------------------------------------------------
 ;;; Multiple cursors
 (use-package iedit :ensure t)
 
-(use-package evil-iedit-state :ensure t)
+;; (use-package evil-iedit-state :ensure t)
 
-(use-package evil-mc
-  :ensure t
-  :commands global-evil-mc-mode
-  :init
-  (global-evil-mc-mode)
-  (evil-define-key 'visual evil-mc-key-map
-    "A" #'evil-mc-make-cursor-in-visual-selection-end
-    "I" #'evil-mc-make-cursor-in-visual-selection-beg))
+;; (use-package evil-mc
+;;   :ensure t
+;;   :commands global-evil-mc-mode
+;;   :init
+;;   (global-evil-mc-mode)
+;;   (evil-define-key 'visual evil-mc-key-map
+;;     "A" #'evil-mc-make-cursor-in-visual-selection-end
+;;     "I" #'evil-mc-make-cursor-in-visual-selection-beg))
 
 
 ;;;----------------------------------------------------------------------

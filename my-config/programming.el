@@ -1,10 +1,16 @@
+;; -*- lexical-binding: t -*-
+
 ;;; Set up various programming modes.
 ;;;
 
 
 (use-package flycheck :ensure t)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
-(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
 
 ;;;----------------------------------------------------------------------
 ;;; Use LSP for better ide-like functions
@@ -47,7 +53,7 @@
 
   :init
   (define-prefix-command 'go-comma-map)
-  (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
+  ;; (evil-define-key '(normal visual motion emacs) go-mode-map (kbd ",") 'go-comma-map)
 
   :bind (:map go-comma-map
               ("a" . go-extra/switch-to-alternative)
@@ -97,7 +103,7 @@
   :ensure t
   :init
   (define-prefix-command 'protobuf-comma-map)
-  (evil-define-key '(normal visual motion emacs) protobuf-mode-map (kbd ",") 'protobuf-comma-map)
+  ;; (evil-define-key '(normal visual motion emacs) protobuf-mode-map (kbd ",") 'protobuf-comma-map)
   :config
   (setq-default c-basic-offset 4)
   (setq-default indent-tabs-mode nil))
@@ -110,7 +116,8 @@
   :ensure t
   :init
   (define-prefix-command 'cql-comma-map)
-  (evil-define-key '(normal visual motion emacs) cql-mode-map (kbd ",") 'cql-comma-map))
+  ;; (evil-define-key '(normal visual motion emacs) cql-mode-map (kbd ",") 'cql-comma-map)
+  )
 
 
 ;;;----------------------------------------------------------------------
@@ -119,11 +126,12 @@
   :ensure nil
   :init
   (define-prefix-command 'elisp-comma-map)
-  (evil-define-key '(normal visual motion emacs) emacs-lisp-mode-map (kbd ",") 'elisp-comma-map)
   (define-key 'elisp-comma-map (kbd "e b") 'eval-buffer)
   (define-key 'elisp-comma-map (kbd "e e") 'eval-last-sexp)
   (define-key 'elisp-comma-map (kbd "e r") 'eval-region)
-  (define-key 'elisp-comma-map (kbd "c") 'emacs-lisp-byte-compile))
+  (define-key 'elisp-comma-map (kbd "c") 'emacs-lisp-byte-compile)
+  :config
+  (keymap-set meow-normal-state-keymap "," elisp-comma-map))
 
 (use-package auto-compile
   :ensure t
@@ -169,7 +177,7 @@
 
 ;;;------------------------------------------------------------------------------
 ;;; Same for editing yaml
-(use-package yaml-mode
+(use-package yaml-ts-mode
   :ensure t)
 
 ;;;------------------------------------------------------------------------------
@@ -180,7 +188,10 @@
 
   :init
   (define-prefix-command 'haskell-comma-map)
-  (evil-define-key '(normal visual motion emacs) haskell-mode-map (kbd ",") 'haskell-comma-map)
+  ;; (evil-define-key '(normal visual motion emacs) haskell-mode-map (kbd ",") 'haskell-comma-map)
 
   :bind (:map haskell-comma-map
               ("c" . compile)))
+
+(use-package haskell-ts-mode
+  :ensure t)
